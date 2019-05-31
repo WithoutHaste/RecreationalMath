@@ -1,0 +1,2 @@
+# RecreationalMath
+Integer sequence generators.
