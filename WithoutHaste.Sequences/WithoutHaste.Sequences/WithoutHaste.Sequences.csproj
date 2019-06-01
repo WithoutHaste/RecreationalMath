@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WithoutHaste.Sequences</RootNamespace>
     <AssemblyName>WithoutHaste.Sequences</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -55,9 +55,8 @@
     <Compile Include="FortunatePrime.cs" />
     <Compile Include="GaussianPrime.cs" />
     <Compile Include="GoodPrime.cs" />
-    <Compile Include="HappyPrime.cs" />
     <Compile Include="HarmonicPrime.cs" />
-    <Compile Include="HiggsPrimeForSquares.cs" />
+    <Compile Include="HiggsPrime.cs" />
     <Compile Include="HighlyCototientPrime.cs" />
     <Compile Include="Ignore\BellNumberPrimes.cs" />
     <Compile Include="Ignore\CarolPrime.cs" />

@@ -23,6 +23,21 @@ namespace TestSequences
 			}
 		}
 
+		/// <summary>
+		/// Assert that the numbers generated are exactly equal to the expected results.
+		/// </summary>
+		private void TestIntersection(Sequence sequenceA, Sequence sequenceB, long[] expected)
+		{
+			//act
+			long[] results = sequenceA.Intersect(sequenceB);
+			//assert
+			Assert.AreEqual(expected.Length, results.Length);
+			for(int i = 0; i < expected.Length; i++)
+			{
+				Assert.AreEqual(expected[i], results[i]);
+			}
+		}
+
 		[TestMethod]
 		public void TestPrime()
 		{
@@ -123,6 +138,27 @@ namespace TestSequences
 			//arrange
 			long[] expected = Happy.TestNumbers;
 			Happy sequence = new Happy(expected.Last());
+			//act assert
+			TestSequence(sequence, expected);
+		}
+
+		[TestMethod]
+		public void TestHappyPrime()
+		{
+			//arrange
+			long[] expected = new long[] { 7, 13, 19, 23, 31, 79, 97, 103, 109, 139, 167, 193, 239, 263, 293, 313, 331, 367, 379, 383, 397, 409, 487, 563, 617, 653, 673, 683, 709, 739, 761, 863, 881, 907, 937, 1009, 1033, 1039, 1093 };
+			Happy happy = new Happy(expected.Last());
+			Prime prime = new Prime(expected.Last());
+			//act assert
+			TestIntersection(happy, prime, expected);
+		}
+
+		[TestMethod]
+		public void TestHiggsPrime()
+		{
+			//arrange
+			long[] expected = HiggsPrime.TestNumbers;
+			HiggsPrime sequence = new HiggsPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
 		}
