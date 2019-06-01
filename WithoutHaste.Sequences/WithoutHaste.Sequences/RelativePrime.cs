@@ -13,8 +13,8 @@ namespace WithoutHaste.Sequences
 	public abstract class RelativePrime : Sequence
 	{
 		/// <inheritdoc/>
-		public override int[] Numbers { get { return (int[])numbers.Clone(); } }
-		private int[] numbers;
+		public override long[] Numbers { get { return (long[])numbers.Clone(); } }
+		private long[] numbers;
 
 		/// <summary>
 		/// The constant to add to each prime. Ex: Cousin Primes use x = 4.
@@ -22,17 +22,17 @@ namespace WithoutHaste.Sequences
 		protected virtual int X { get; }
 
 		/// <param name="x">The constant to add to each prime. Ex: Cousin Primes use x = 4.</param>
-		public RelativePrime(int max) : base(max)
+		public RelativePrime(long max) : base(max)
 		{
 		}
 
 		protected override void Generate()
 		{
-			int[] primes = new Prime(Max + X).Numbers;
-			List<int> relativePrimes = new List<int>();
-			foreach(int p in primes.Where(p => p <= Max))
+			long[] primes = new Prime(Max + X).Numbers;
+			List<long> relativePrimes = new List<long>();
+			foreach(long p in primes.Where(p => p <= Max))
 			{
-				int p2 = p + X;
+				long p2 = p + X;
 				if(primes.Contains(p2))
 				{
 					relativePrimes.Add(p);

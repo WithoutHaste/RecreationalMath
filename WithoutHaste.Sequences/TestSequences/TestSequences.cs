@@ -11,10 +11,10 @@ namespace TestSequences
 		/// <summary>
 		/// Assert that the numbers generated are exactly equal to the expected results.
 		/// </summary>
-		private void TestSequence(Sequence sequence, int[] expected)
+		private void TestSequence(Sequence sequence, long[] expected)
 		{
 			//act
-			int[] results = sequence.Numbers;
+			long[] results = sequence.Numbers;
 			//assert
 			Assert.AreEqual(expected.Length, results.Length);
 			for(int i = 0; i < expected.Length; i++)
@@ -27,7 +27,7 @@ namespace TestSequences
 		public void TestPrime()
 		{
 			//arrange
-			int[] expected = Prime.TestNumbers;
+			long[] expected = Prime.TestNumbers;
 			Prime sequence = new Prime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -37,7 +37,7 @@ namespace TestSequences
 		public void TestAdditivePrime()
 		{
 			//arrange
-			int[] expected = AdditivePrime.TestNumbers;
+			long[] expected = AdditivePrime.TestNumbers;
 			AdditivePrime sequence = new AdditivePrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -47,7 +47,7 @@ namespace TestSequences
 		public void TestCircularPrime()
 		{
 			//arrange
-			int[] expected = CircularPrime.TestNumbers;
+			long[] expected = CircularPrime.TestNumbers;
 			CircularPrime sequence = new CircularPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -59,7 +59,7 @@ namespace TestSequences
 		public void TestTwinPrime()
 		{
 			//arrange
-			int[] expected = TwinPrime.TestNumbers;
+			long[] expected = TwinPrime.TestNumbers;
 			TwinPrime sequence = new TwinPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -69,7 +69,7 @@ namespace TestSequences
 		public void TestCousinPrime()
 		{
 			//arrange
-			int[] expected = CousinPrime.TestNumbers;
+			long[] expected = CousinPrime.TestNumbers;
 			CousinPrime sequence = new CousinPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -79,12 +79,52 @@ namespace TestSequences
 		public void TestSexyPrime()
 		{
 			//arrange
-			int[] expected = SexyPrime.TestNumbers;
+			long[] expected = SexyPrime.TestNumbers;
 			SexyPrime sequence = new SexyPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
 		}
 
 		#endregion
+
+		[TestMethod]
+		public void TestEmirpPrime()
+		{
+			//arrange
+			long[] expected = EmirpPrime.TestNumbers;
+			EmirpPrime sequence = new EmirpPrime(expected.Last());
+			//act assert
+			TestSequence(sequence, expected);
+		}
+
+		//[TestMethod]
+		//public void TestFortunate()
+		//{
+		//	//arrange
+		//	long[] expected = Fortunate.TestNumbers;
+		//	Fortunate sequence = new Fortunate(expected.Last());
+		//	//act assert
+		//	TestSequence(sequence, expected);
+		//}
+
+		[TestMethod]
+		public void TestGoodPrime()
+		{
+			//arrange
+			long[] expected = GoodPrime.TestNumbers;
+			GoodPrime sequence = new GoodPrime(expected.Last());
+			//act assert
+			TestSequence(sequence, expected);
+		}
+
+		[TestMethod]
+		public void TestHappy()
+		{
+			//arrange
+			long[] expected = Happy.TestNumbers;
+			Happy sequence = new Happy(expected.Last());
+			//act assert
+			TestSequence(sequence, expected);
+		}
 	}
 }

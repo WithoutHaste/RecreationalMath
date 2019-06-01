@@ -8,17 +8,17 @@
 		/// <summary>
 		/// The maximum number that can be in the sequence.
 		/// </summary>
-		public int Max { get; private set; }
+		public long Max { get; protected set; }
 		/// <summary>
 		/// Returns the full list of numbers, ordered least to greatest.
 		/// </summary>
-		public abstract int[] Numbers { get; }
+		public abstract long[] Numbers { get; }
 		/// <summary>
 		/// List of numbers from other sources to test against.
 		/// </summary>
-		internal static int[] TestNumbers;
+		internal static long[] TestNumbers;
 
-		public Sequence(int max)
+		public Sequence(long max)
 		{
 			Max = max;
 			Generate();

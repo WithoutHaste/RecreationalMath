@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditivePrime.cs" />
+    <Compile Include="Fortunate.cs" />
+    <Compile Include="Happy.cs" />
     <Compile Include="Ignore\AnnihilatingPrimes.cs" />
     <Compile Include="Ignore\BinaryQuadraticFormPrime.cs" />
     <Compile Include="Ignore\ChenPrime.cs" />
