@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Numerics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WithoutHaste.Sequences;
 
@@ -11,10 +12,10 @@ namespace TestSequences
 		/// <summary>
 		/// Assert that the numbers generated are exactly equal to the expected results.
 		/// </summary>
-		private void TestSequence(Sequence sequence, long[] expected)
+		private void TestSequence(Sequence sequence, BigInteger[] expected)
 		{
 			//act
-			long[] results = sequence.Numbers;
+			BigInteger[] results = sequence.Numbers;
 			//assert
 			Assert.AreEqual(expected.Length, results.Length);
 			for(int i = 0; i < expected.Length; i++)
@@ -26,10 +27,10 @@ namespace TestSequences
 		/// <summary>
 		/// Assert that the numbers generated are exactly equal to the expected results.
 		/// </summary>
-		private void TestIntersection(Sequence sequenceA, Sequence sequenceB, long[] expected)
+		private void TestIntersection(Sequence sequenceA, Sequence sequenceB, BigInteger[] expected)
 		{
 			//act
-			long[] results = sequenceA.Intersect(sequenceB);
+			BigInteger[] results = sequenceA.Intersect(sequenceB);
 			//assert
 			Assert.AreEqual(expected.Length, results.Length);
 			for(int i = 0; i < expected.Length; i++)
@@ -42,7 +43,7 @@ namespace TestSequences
 		public void TestPrime()
 		{
 			//arrange
-			long[] expected = Prime.TestNumbers;
+			BigInteger[] expected = Prime.TestNumbers;
 			Prime sequence = new Prime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -52,7 +53,7 @@ namespace TestSequences
 		public void TestAdditivePrime()
 		{
 			//arrange
-			long[] expected = AdditivePrime.TestNumbers;
+			BigInteger[] expected = AdditivePrime.TestNumbers;
 			AdditivePrime sequence = new AdditivePrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -62,7 +63,7 @@ namespace TestSequences
 		public void TestCircularPrime()
 		{
 			//arrange
-			long[] expected = CircularPrime.TestNumbers;
+			BigInteger[] expected = CircularPrime.TestNumbers;
 			CircularPrime sequence = new CircularPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -74,7 +75,7 @@ namespace TestSequences
 		public void TestTwinPrime()
 		{
 			//arrange
-			long[] expected = TwinPrime.TestNumbers;
+			BigInteger[] expected = TwinPrime.TestNumbers;
 			TwinPrime sequence = new TwinPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -84,7 +85,7 @@ namespace TestSequences
 		public void TestCousinPrime()
 		{
 			//arrange
-			long[] expected = CousinPrime.TestNumbers;
+			BigInteger[] expected = CousinPrime.TestNumbers;
 			CousinPrime sequence = new CousinPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -94,7 +95,7 @@ namespace TestSequences
 		public void TestSexyPrime()
 		{
 			//arrange
-			long[] expected = SexyPrime.TestNumbers;
+			BigInteger[] expected = SexyPrime.TestNumbers;
 			SexyPrime sequence = new SexyPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -106,7 +107,7 @@ namespace TestSequences
 		public void TestEmirpPrime()
 		{
 			//arrange
-			long[] expected = EmirpPrime.TestNumbers;
+			BigInteger[] expected = EmirpPrime.TestNumbers;
 			EmirpPrime sequence = new EmirpPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -126,7 +127,7 @@ namespace TestSequences
 		public void TestGoodPrime()
 		{
 			//arrange
-			long[] expected = GoodPrime.TestNumbers;
+			BigInteger[] expected = GoodPrime.TestNumbers;
 			GoodPrime sequence = new GoodPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -136,7 +137,7 @@ namespace TestSequences
 		public void TestHappy()
 		{
 			//arrange
-			long[] expected = Happy.TestNumbers;
+			BigInteger[] expected = Happy.TestNumbers;
 			Happy sequence = new Happy(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -146,7 +147,7 @@ namespace TestSequences
 		public void TestHappyPrime()
 		{
 			//arrange
-			long[] expected = new long[] { 7, 13, 19, 23, 31, 79, 97, 103, 109, 139, 167, 193, 239, 263, 293, 313, 331, 367, 379, 383, 397, 409, 487, 563, 617, 653, 673, 683, 709, 739, 761, 863, 881, 907, 937, 1009, 1033, 1039, 1093 };
+			BigInteger[] expected = new BigInteger[] { 7, 13, 19, 23, 31, 79, 97, 103, 109, 139, 167, 193, 239, 263, 293, 313, 331, 367, 379, 383, 397, 409, 487, 563, 617, 653, 673, 683, 709, 739, 761, 863, 881, 907, 937, 1009, 1033, 1039, 1093 };
 			Happy happy = new Happy(expected.Last());
 			Prime prime = new Prime(expected.Last());
 			//act assert
@@ -157,7 +158,7 @@ namespace TestSequences
 		public void TestHiggsPrime()
 		{
 			//arrange
-			long[] expected = HiggsPrime.TestNumbers;
+			BigInteger[] expected = HiggsPrime.TestNumbers;
 			HiggsPrime sequence = new HiggsPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);

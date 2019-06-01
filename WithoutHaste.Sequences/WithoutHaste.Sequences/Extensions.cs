@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
@@ -10,9 +7,9 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// Returns the sum of the digits of <paramref name='n'/>.
 		/// </summary>
-		internal static long SumOfDigits(this long n)
+		internal static BigInteger SumOfDigits(this BigInteger n)
 		{
-			long sum = 0;
+			BigInteger sum = 0;
 			foreach(char c in n.ToString())
 			{
 				switch(c)
@@ -35,9 +32,9 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// Returns the sum of the squares of the digits of <paramref name='n'/>.
 		/// </summary>
-		internal static long SumOfSquaresOfDigits(this long n)
+		internal static BigInteger SumOfSquaresOfDigits(this BigInteger n)
 		{
-			long sum = 0;
+			BigInteger sum = 0;
 			foreach(char c in n.ToString())
 			{
 				switch(c)
@@ -65,14 +62,14 @@ namespace WithoutHaste.Sequences
 		/// <remarks>
 		/// Assumes <paramref name='primes'/> contains all the necessary primes.
 		/// </remarks>
-		internal static long Primorial(this long n, long[] primes)
+		internal static BigInteger Primorial(this BigInteger n, BigInteger[] primes)
 		{
-			long primorial = 1;
-			for(long i = primes.Length - 1; i >= 0; i--)
+			BigInteger primorial = 1;
+			for(BigInteger i = primes.Length - 1; i >= 0; i--)
 			{
-				if(primes[i] <= n)
+				if(primes[(long)i] <= n) //todo what if i is bigger than long?
 				{
-					primorial *= primes[i];
+					primorial *= primes[(long)i];
 				}
 			}
 			return primorial;

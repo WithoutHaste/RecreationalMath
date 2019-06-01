@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
@@ -13,21 +13,21 @@ namespace WithoutHaste.Sequences
 	public class GoodPrime : Sequence
 	{
 		/// <inheritdoc/>
-		public override long[] Numbers { get { return (long[])numbers.Clone(); } }
-		private long[] numbers;
+		public override BigInteger[] Numbers { get { return (BigInteger[])numbers.Clone(); } }
+		private BigInteger[] numbers;
 
 		/// <inheritdoc/>
-		internal static new long[] TestNumbers = new long[] { 5, 11, 17, 29, 37, 41, 53, 59, 67, 71, 97, 101, 127, 149, 179, 191, 223, 227, 251, 257, 269, 307 };
+		internal static new BigInteger[] TestNumbers = new BigInteger[] { 5, 11, 17, 29, 37, 41, 53, 59, 67, 71, 97, 101, 127, 149, 179, 191, 223, 227, 251, 257, 269, 307 };
 
-		public GoodPrime(long max) : base(max)
+		public GoodPrime(BigInteger max) : base(max)
 		{
 		}
 
 		protected override void Generate()
 		{
 			Prime prime = new Prime(Max);
-			List<long> goodPrimes = new List<long>();
-			foreach(long p in prime.Numbers)
+			List<BigInteger> goodPrimes = new List<BigInteger>();
+			foreach(BigInteger p in prime.Numbers)
 			{
 				if(IsGoodPrime(p, prime))
 					goodPrimes.Add(p);
@@ -35,13 +35,13 @@ namespace WithoutHaste.Sequences
 			numbers = goodPrimes.ToArray();
 		}
 
-		private bool IsGoodPrime(long p, Prime prime)
+		private bool IsGoodPrime(BigInteger p, Prime prime)
 		{
 			if(p == 2)
 				return false;
-			long pIndex = Array.IndexOf(prime.Numbers, p);
-			long pSquared = p * p;
-			for(int i = 1; pIndex - i >= 0; i++)
+			BigInteger pIndex = Array.IndexOf(prime.Numbers, p); //TODO what if index is bigger than long
+			BigInteger pSquared = p * p;
+			for(BigInteger i = 1; pIndex - i >= 0; i++)
 			{
 				while(prime.Count <= pIndex + i)
 				{

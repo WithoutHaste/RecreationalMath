@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
@@ -20,26 +19,26 @@ namespace WithoutHaste.Sequences
 	public class Fortunate : Sequence
 	{
 		/// <inheritdoc/>
-		public override long[] Numbers { get { return (long[])numbers.Clone(); } }
-		private long[] numbers;
+		public override BigInteger[] Numbers { get { return (BigInteger[])numbers.Clone(); } }
+		private BigInteger[] numbers;
 
 		/// <inheritdoc/>
-		internal static new long[] TestNumbers = new long[] { 3, 5, 7, 13, 17, 19, 23, 37, 47, 59, 61, 67, 71, 79, 89, 101, 103, 107, 109, 127, 151, 157, 163, 167, 191, 197, 199 };
+		internal static new BigInteger[] TestNumbers = new BigInteger[] { 3, 5, 7, 13, 17, 19, 23, 37, 47, 59, 61, 67, 71, 79, 89, 101, 103, 107, 109, 127, 151, 157, 163, 167, 191, 197, 199 };
 
-		public Fortunate(long max) : base(max)
+		public Fortunate(BigInteger max) : base(max)
 		{
 		}
 
 		protected override void Generate()
 		{
 			Prime prime = new Prime(Max);
-			List<long> fortunates = new List<long>();
+			List<BigInteger> fortunates = new List<BigInteger>();
 			while(true)
 			{
-				long n = fortunates.Count + 1;
+				BigInteger n = fortunates.Count + 1;
 				prime.IncreaseMax(n);
-				long primorial = n.Primorial(prime.Numbers);
-				long m = 2;
+				BigInteger primorial = n.Primorial(prime.Numbers);
+				BigInteger m = 2;
 				while(true)
 				{
 					if(prime.Max < primorial + m)

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
@@ -13,8 +12,8 @@ namespace WithoutHaste.Sequences
 	public abstract class RelativePrime : Sequence
 	{
 		/// <inheritdoc/>
-		public override long[] Numbers { get { return (long[])numbers.Clone(); } }
-		private long[] numbers;
+		public override BigInteger[] Numbers { get { return (BigInteger[])numbers.Clone(); } }
+		private BigInteger[] numbers;
 
 		/// <summary>
 		/// The constant to add to each prime. Ex: Cousin Primes use x = 4.
@@ -22,17 +21,17 @@ namespace WithoutHaste.Sequences
 		protected virtual int X { get; }
 
 		/// <param name="x">The constant to add to each prime. Ex: Cousin Primes use x = 4.</param>
-		public RelativePrime(long max) : base(max)
+		public RelativePrime(BigInteger max) : base(max)
 		{
 		}
 
 		protected override void Generate()
 		{
-			long[] primes = new Prime(Max + X).Numbers;
-			List<long> relativePrimes = new List<long>();
-			foreach(long p in primes.Where(p => p <= Max))
+			BigInteger[] primes = new Prime(Max + X).Numbers;
+			List<BigInteger> relativePrimes = new List<BigInteger>();
+			foreach(BigInteger p in primes.Where(p => p <= Max))
 			{
-				long p2 = p + X;
+				BigInteger p2 = p + X;
 				if(primes.Contains(p2))
 				{
 					relativePrimes.Add(p);

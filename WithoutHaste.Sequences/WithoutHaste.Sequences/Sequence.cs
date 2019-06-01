@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
@@ -11,17 +12,17 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// The maximum number that can be in the sequence.
 		/// </summary>
-		public long Max { get; protected set; }
+		public BigInteger Max { get; protected set; }
 		/// <summary>
 		/// Returns the full list of numbers, ordered least to greatest.
 		/// </summary>
-		public abstract long[] Numbers { get; }
+		public abstract BigInteger[] Numbers { get; }
 		/// <summary>
 		/// List of numbers from other sources to test against.
 		/// </summary>
-		internal static long[] TestNumbers;
+		internal static BigInteger[] TestNumbers;
 
-		public Sequence(long max)
+		public Sequence(BigInteger max)
 		{
 			Max = max;
 			Generate();
@@ -36,7 +37,7 @@ namespace WithoutHaste.Sequences
 		/// Returns an ordered list of the numbers that appear in both sequences.
 		/// </summary>
 		/// <exception cref='Exception'>Both sequences must have the same Max value.</exception>
-		public long[] Intersect(Sequence other)
+		public BigInteger[] Intersect(Sequence other)
 		{
 			if(this.Max != other.Max)
 				throw new Exception("Both sequences must have the same Max value.");
