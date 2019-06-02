@@ -163,5 +163,15 @@ namespace TestSequences
 			//act assert
 			TestSequence(sequence, expected);
 		}
+
+		[TestMethod]
+		public void TestHighlyCototient()
+		{
+			//arrange
+			BigInteger[] expected = HighlyCototient.TestNumbers;
+			HighlyCototient sequence = new HighlyCototient(expected.Last());
+			//act assert
+			TestSequence(sequence, expected);
+		}
 	}
 }

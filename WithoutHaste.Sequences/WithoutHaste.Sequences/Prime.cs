@@ -31,12 +31,12 @@ namespace WithoutHaste.Sequences
 		/// Cache of longest generated list of primes.
 		/// Look here before generating new list.
 		/// </summary>
-		internal static BigInteger[] CacheNumbers = new BigInteger[] { };
-		internal static bool[] CacheSeive = new bool[] { };
+		private static BigInteger[] CacheNumbers = new BigInteger[] { };
+		private static bool[] CacheSeive = new bool[] { };
 		/// <summary>
 		/// Cache of max related to <see cref='CacheNumbers'/>. May be higher than highest number in that list.
 		/// </summary>
-		internal static BigInteger CacheMax = 0;
+		public static BigInteger CacheMax { get; private set; }
 
 		private BigInteger[] numbers; //generated numbers
 		private bool[] seiveOfEristothenes; //full seive, true == prime
@@ -74,10 +74,14 @@ namespace WithoutHaste.Sequences
 		/// <inheritdoc/>
 		protected override void Generate()
 		{
-			Debug.WriteLine("Generate Primes to " + Max);
+			//TODO: anytime it can't go to the cache, it should generate 1000 extra (by a public static setting)
+			//without changing the local Max or Numbers
+			//so that outside sources don't have to manage that decision
 
 			if(LoadFromCache())
 				return;
+
+			Debug.WriteLine("Generate Primes to " + Max);
 
 			seiveOfEristothenes = new bool[(long)Max + 1]; //true is prime //todo what if seive is longer than int or long allow?
 			for(BigInteger i = 0; i < seiveOfEristothenes.Length; i++)

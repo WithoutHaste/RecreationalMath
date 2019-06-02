@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Linq;
+using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
@@ -73,6 +75,57 @@ namespace WithoutHaste.Sequences
 				}
 			}
 			return primorial;
+		}
+
+		/// <summary>
+		/// Cototient(n) = n - Totient(n)
+		/// </summary>
+		/// <exception cref='ArgumentException'><paramref name='n'/> must be greater than 1.</exception>
+		internal static BigInteger Cototient(this BigInteger n)
+		{
+			if(n <= 1)
+				throw new ArgumentException("Number must be greater than 1.");
+			return n - Totient(n);
+		}
+
+		/// <summary>
+		/// Only valid for integers greater than 1.
+		/// Totient (or phi(N)) means the number of positive integers (including 1) less than N that are coprime to N
+		/// </summary>
+		/// <remarks>
+		/// The totient of a prime number N = N - 1
+		/// </remarks>
+		/// <exception cref='ArgumentException'><paramref name='n'/> must be greater than 1.</exception>
+		internal static BigInteger Totient(this BigInteger n)
+		{
+			if(n <= 1)
+				throw new ArgumentException("Number must be greater than 1.");
+			//tried checking for n being prime here, but it slowed down noticably
+			//Prime prime = new Prime(n);
+			//if(prime.Contains(n))
+			//	return n - 1;
+			BigInteger count = 0;
+			for(BigInteger x = 1; x < n; x++)
+			{
+				if(n.Coprime(x))
+					count++;
+			}
+			return count;
+		}
+
+		/// <summary>
+		/// <paramref name='a'/> and <paramref name='b'/> are coprime if they share no prime factors.
+		/// </summary>
+		internal static bool Coprime(this BigInteger a, BigInteger b)
+		{
+			BigInteger[] primeFactorsA = PrimeFactors.Lookup(a);
+			BigInteger[] primeFactorsB = PrimeFactors.Lookup(b);
+			foreach(BigInteger p in primeFactorsA)
+			{
+				if(primeFactorsB.Contains(p))
+					return false;
+			}
+			return true;
 		}
 	}
 }

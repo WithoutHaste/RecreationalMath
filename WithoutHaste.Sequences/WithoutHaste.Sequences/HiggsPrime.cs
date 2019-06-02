@@ -29,7 +29,6 @@ namespace WithoutHaste.Sequences
 
 		protected override void Generate()
 		{
-			// Primes p for which p−1 divides the square of the product of all earlier terms
 			BigInteger[] primes = new Prime(Max).Numbers;
 			List<BigInteger> higgsPrimes = new List<BigInteger>();
 			BigInteger productOfHiggsPrimes = 1;
