@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
@@ -16,7 +17,16 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// Returns the full list of numbers, ordered least to greatest.
 		/// </summary>
-		public abstract BigInteger[] Numbers { get; }
+		public abstract List<BigInteger> Numbers { get; protected set; }
+		/// <summary>
+		/// Returns element at 0-based index.
+		/// </summary>
+		/// <remarks>
+		/// Only accepts integer indexes, even if list is longer than that.
+		/// Does not protect against out of range errors.
+		/// </remarks>
+		public BigInteger this[int index] { get { return Numbers[index]; } }
+
 		/// <summary>
 		/// List of numbers from other sources to test against.
 		/// </summary>
@@ -24,6 +34,7 @@ namespace WithoutHaste.Sequences
 
 		public Sequence(BigInteger max)
 		{
+			Numbers = new List<BigInteger>();
 			Max = max;
 			Generate();
 		}
@@ -43,5 +54,14 @@ namespace WithoutHaste.Sequences
 				throw new Exception("Both sequences must have the same Max value.");
 			return this.Numbers.Intersect(other.Numbers).OrderBy(x => x).ToArray();
 		}
+
+		/// <summary>
+		/// Folder to contain all files related to this sequence.
+		/// </summary>
+		protected virtual string GetSaveToFolder()
+		{
+			return "Default";
+		}
+
 	}
 }

@@ -4,3 +4,6 @@ WithoutHaste.Sequences/WithoutHaste.Sequences/obj/*
 
 WithoutHaste.Sequences/TestSequences/bin/*
 WithoutHaste.Sequences/TestSequences/obj/*
+
+WithoutHaste.Sequences/Generator/bin/*
+WithoutHaste.Sequences/Generator/obj/*

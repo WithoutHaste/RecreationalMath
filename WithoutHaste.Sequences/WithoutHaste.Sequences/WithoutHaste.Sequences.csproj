@@ -82,11 +82,13 @@
     <Compile Include="SafePrime.cs" />
     <Compile Include="SelfPrime.cs" />
     <Compile Include="Sequence.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="SexyPrime.cs" />
     <Compile Include="SolinasPrime.cs" />
     <Compile Include="SophieGermainPrime.cs" />
     <Compile Include="StarPrime.cs" />
     <Compile Include="SuperPrime.cs" />
+    <Compile Include="Tools\SieveOfEratosthenes.cs" />
     <Compile Include="TripletPrime.cs" />
     <Compile Include="TwinPrime.cs" />
     <Compile Include="UlamPrime.cs" />
