@@ -5,6 +5,7 @@ using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
+	/*
 	/// <summary>
 	/// If you take a number, and take the sum of the squares of its digits,
 	/// and then you repeat that
@@ -51,4 +52,5 @@ namespace WithoutHaste.Sequences
 			numbers = happys.Distinct().OrderBy(n => n).ToArray();
 		}
 	}
+	*/
 }

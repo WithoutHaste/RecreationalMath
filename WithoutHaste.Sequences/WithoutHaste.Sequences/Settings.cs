@@ -15,5 +15,17 @@ namespace WithoutHaste.Sequences
 		/// This directory is also searched for pre-generated data.
 		/// </summary>
 		public static string SaveToDirectory = "Sequences";
+
+		/// <summary>
+		/// Break sequences into multiple files.
+		/// The first holds all elements from 1 to <see cref='SaveRangePerFile'/>, the next holds all elements from <see cref='SaveRangePerFile'/> + 1 to 2 * <see cref='SaveRangePerFile'/>, and so on.
+		/// So you can look up a number by the range it is in.
+		/// </summary>
+		public static int SaveRangePerFile = 100000;
+
+		/// <summary>
+		/// File extension for binary-format integer files.
+		/// </summary>
+		public static string IntegerFileExtension = "int";
 	}
 }

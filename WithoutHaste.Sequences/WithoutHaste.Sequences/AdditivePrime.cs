@@ -5,6 +5,7 @@ using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
+	/*
 	/// <summary>
 	/// Prime number where sum of digits is also a prime number.
 	/// </summary>
@@ -36,4 +37,5 @@ namespace WithoutHaste.Sequences
 			numbers = additivePrimes.ToArray();
 		}
 	}
+	*/
 }

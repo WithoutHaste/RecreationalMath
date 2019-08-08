@@ -4,6 +4,7 @@ using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
+	/*
 	/// <summary>
 	/// There is no standard name for this category.
 	/// A prime where p + x is also prime, or p - x is also prime (both sides of pair are saved).
@@ -42,4 +43,5 @@ namespace WithoutHaste.Sequences
 			numbers = relativePrimes.Distinct().OrderBy(n => n).ToArray();
 		}
 	}
+	*/
 }

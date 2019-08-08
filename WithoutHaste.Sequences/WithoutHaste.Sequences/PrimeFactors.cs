@@ -6,6 +6,7 @@ using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
+	/*
 	/// <summary>
 	/// Calculates the prime factors of integers.
 	/// </summary>
@@ -100,4 +101,5 @@ namespace WithoutHaste.Sequences
 			CacheFactors[n] = primeFactors.Distinct().OrderBy(x => x).ToList();
 		}
 	}
+	*/
 }

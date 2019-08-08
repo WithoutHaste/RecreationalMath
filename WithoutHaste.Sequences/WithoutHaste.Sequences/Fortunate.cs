@@ -3,6 +3,7 @@ using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
+	/*
 	/// <summary>
 	/// The Nth fortunate number is:
 	///   Primorial = the product of the first N prime numbers
@@ -54,4 +55,5 @@ namespace WithoutHaste.Sequences
 			numbers = fortunates.ToArray();
 		}
 	}
+	*/
 }

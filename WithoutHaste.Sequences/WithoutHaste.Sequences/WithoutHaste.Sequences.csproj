@@ -38,7 +38,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -53,7 +52,7 @@
     <Compile Include="CousinPrime.cs" />
     <Compile Include="EisensteinPrime.cs" />
     <Compile Include="EmirpPrime.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Tools\Extensions.cs" />
     <Compile Include="FortunatePrime.cs" />
     <Compile Include="GaussianPrime.cs" />
     <Compile Include="GoodPrime.cs" />
@@ -88,7 +87,8 @@
     <Compile Include="SophieGermainPrime.cs" />
     <Compile Include="StarPrime.cs" />
     <Compile Include="SuperPrime.cs" />
-    <Compile Include="Tools\SieveOfEratosthenes.cs" />
+    <Compile Include="SieveOfEratosthenes.cs" />
+    <Compile Include="Tools\StartsWithNumberComparer.cs" />
     <Compile Include="TripletPrime.cs" />
     <Compile Include="TwinPrime.cs" />
     <Compile Include="UlamPrime.cs" />

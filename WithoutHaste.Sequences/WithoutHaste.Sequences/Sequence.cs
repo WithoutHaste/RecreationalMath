@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
+using WithoutHaste.Sequences.Tools;
 
 namespace WithoutHaste.Sequences
 {
@@ -17,7 +19,7 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// Returns the full list of numbers, ordered least to greatest.
 		/// </summary>
-		public abstract List<BigInteger> Numbers { get; protected set; }
+		public List<BigInteger> Numbers { get; protected set; }
 		/// <summary>
 		/// Returns element at 0-based index.
 		/// </summary>
@@ -28,6 +30,11 @@ namespace WithoutHaste.Sequences
 		public BigInteger this[int index] { get { return Numbers[index]; } }
 
 		/// <summary>
+		/// Set to true if loading pre-generated data was able to confirm that all elements up the Max were loaded.
+		/// </summary>
+		private bool loadReachedMax = false;
+
+		/// <summary>
 		/// List of numbers from other sources to test against.
 		/// </summary>
 		internal static BigInteger[] TestNumbers;
@@ -36,7 +43,20 @@ namespace WithoutHaste.Sequences
 		{
 			Numbers = new List<BigInteger>();
 			Max = max;
+			Initialize();
+			Load();
+			if(loadReachedMax)
+				return;
 			Generate();
+		}
+
+		/// <summary>
+		/// Initialize tracking and generator.
+		/// Occurs before Load and Generate.
+		/// </summary>
+		protected virtual void Initialize()
+		{
+			//no statement
 		}
 
 		/// <summary>
@@ -58,10 +78,98 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// Folder to contain all files related to this sequence.
 		/// </summary>
-		protected virtual string GetSaveToFolder()
+		protected abstract string GetSaveToFolder();
+
+		/// <summary>
+		/// Load pre-generated data from file(s).
+		/// Assumes files contain every element in the sequence in the file's range.
+		/// </summary>
+		private void Load()
 		{
-			return "Default";
+			string path = Path.Combine(Settings.SaveToDirectory, GetSaveToFolder());
+			if(!Directory.Exists(path))
+				return;
+			string[] filenames = Directory.GetFiles(path).Select(f => Path.GetFileName(f)).ToArray();
+			Array.Sort(filenames, new StartsWithNumberComparer());
+			foreach(string filename in filenames)
+			{
+				using(BinaryReader reader = new BinaryReader(File.Open(Path.Combine(path, filename), FileMode.Open)))
+				{
+					while(reader.BaseStream.Position != reader.BaseStream.Length)
+					{
+						int number = reader.ReadInt32();
+						if(number > Max)
+						{
+							loadReachedMax = true;
+							break;
+						}
+						Load_AddNumber(number);
+					}
+				}
+			}
 		}
 
+		/// <summary>
+		/// How to apply a pre-loaded number to the collection.
+		/// </summary>
+		protected virtual void Load_AddNumber(BigInteger number)
+		{
+			Numbers.Add(number);
+		}
+
+		/// <summary>
+		/// Save sequence to file(s).
+		/// </summary>
+		/// <remarks>
+		/// Files are saved in binary format to save space.
+		/// It is one Int32 after another, with nothing between them.
+		/// Therefore, the largest sequence element that can be saved is Int32.MaxValue.
+		/// </remarks>
+		/// <remarks>
+		/// Does not remove old files.
+		/// </remarks>
+		public void Save()
+		{
+			string path = Path.Combine(Settings.SaveToDirectory, GetSaveToFolder());
+			Directory.CreateDirectory(path);
+
+			int range = Settings.SaveRangePerFile;
+			BigInteger min = 1;
+			List<List<BigInteger>> segments = BreakSequenceIntoSegments(range);
+			foreach(List<BigInteger> segment in segments)
+			{
+				string filename = String.Format("{0}to{1}.{2}", min, min + range - 1, Settings.IntegerFileExtension);
+				using(BinaryWriter writer = new BinaryWriter(File.Open(Path.Combine(path, filename), FileMode.Create))) //create or overwrite
+				{
+					foreach(BigInteger number in segment)
+					{
+						writer.Write((int)number);
+					}
+				}
+				min += range;
+			}
+		}
+
+		/// <summary>
+		/// Breaks sequence into segments to save to files.
+		/// </summary>
+		private List<List<BigInteger>> BreakSequenceIntoSegments(int range)
+		{
+			List<List<BigInteger>> segments = new List<List<BigInteger>>();
+			List<BigInteger> nextSegment = new List<BigInteger>();
+			BigInteger segmentMax = range;
+			for(int i = 0; i < this.Numbers.Count; i++)
+			{
+				if(this.Numbers[i] > segmentMax)
+				{
+					segments.Add(nextSegment);
+					nextSegment = new List<BigInteger>();
+					segmentMax += range;
+				}
+				nextSegment.Add(this.Numbers[i]);
+			}
+			segments.Add(nextSegment);
+			return segments;
+		}
 	}
 }

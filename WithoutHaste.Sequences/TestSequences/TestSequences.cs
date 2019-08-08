@@ -6,6 +6,7 @@ using WithoutHaste.Sequences;
 
 namespace TestSequences
 {
+	/*
 	[TestClass]
 	public class TestSequences
 	{
@@ -174,4 +175,5 @@ namespace TestSequences
 			TestSequence(sequence, expected);
 		}
 	}
+	*/
 }

@@ -12,5 +12,8 @@ GitHub has something like a 5mb file size limit, and my projected usage for this
 
 Design the pre-generation process so it could be started off fresh, and it would automatically generate everything (eventually). Also to restart in the middle of the process and pick up where it left off.
 
+Using custom extension ".int" for the binary files of integers. No delimiters, just one integer after another.
+
 TODO: rename repository to WithoutHaste.Math  
-TODO: rename this solution to WithoutHaste.Math.Sequences
+TODO: rename this solution to WithoutHaste.Math.Sequences  
+TODO: will need an object for BigList, that supports BigInteger indexing and handles multiple lists behind the scenes **OR** officially decide and restrict library to only go up to Int32.MaxValue and remove System.Numerics references.

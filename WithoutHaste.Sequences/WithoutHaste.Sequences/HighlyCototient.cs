@@ -5,6 +5,7 @@ using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
+	/*
 	/// <summary>
 	/// a highly cototient number is a positive integer k which is above 1 and has more solutions to the equation
 	/// x - totient(x) = k
@@ -61,4 +62,5 @@ namespace WithoutHaste.Sequences
 			numbers = highlyCototient.ToArray();
 		}
 	}
+	*/
 }

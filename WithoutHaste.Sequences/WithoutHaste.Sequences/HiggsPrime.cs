@@ -5,6 +5,7 @@ using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
+	/*
 	/// <summary>
 	/// A Higgs prime, named after Denis Higgs, is a prime number with a totient (one less than the prime) that evenly divides the square of the product of the smaller Higgs primes.
 	/// 
@@ -45,4 +46,5 @@ namespace WithoutHaste.Sequences
 			numbers = higgsPrimes.ToArray();
 		}
 	}
+	*/
 }

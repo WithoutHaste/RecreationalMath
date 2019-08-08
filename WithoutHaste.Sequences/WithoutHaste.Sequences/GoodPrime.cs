@@ -4,6 +4,7 @@ using System.Numerics;
 
 namespace WithoutHaste.Sequences
 {
+	/*
 	/// <summary>
 	/// A prime whose square is greater than the product of any two primes at +i and -i positions from the prime
 	/// Or: p_n for which p_n^2 > p_n−i * p_n+i for all 1 ≤ i ≤ n−1, where p_n is the nth prime. 
@@ -54,4 +55,5 @@ namespace WithoutHaste.Sequences
 			return true;
 		}
 	}
+	*/
 }
