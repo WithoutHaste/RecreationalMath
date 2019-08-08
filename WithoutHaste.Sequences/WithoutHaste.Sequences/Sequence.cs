@@ -146,6 +146,14 @@ namespace WithoutHaste.Sequences
 						writer.Write((int)number);
 					}
 				}
+				string textFilename = String.Format("{0}to{1}.txt", min, min + range - 1);
+				using(StreamWriter writer = new StreamWriter(Path.Combine(path, textFilename)))
+				{
+					foreach(BigInteger number in segment)
+					{
+						writer.WriteLine(number);
+					}
+				}
 				min += range;
 			}
 		}

@@ -12,11 +12,9 @@ namespace Generator
 	{
 		static void Main(string[] args)
 		{
-			Sequence sequence = new SieveOfEratosthenes(10);
-			var n1 = sequence.Numbers;
+			Sequence sequence = new SieveOfEratosthenes(5000000);
+			//var n1 = sequence.Numbers;
 			sequence.Save();
-			Sequence sequence2 = new SieveOfEratosthenes(11);
-			var n2 = sequence2.Numbers;
 		}
 	}
 }
