@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Numerics;
 using WithoutHaste.Sequences.Tools;
 
 namespace WithoutHaste.Sequences
@@ -15,19 +14,18 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// The maximum number that can be in the sequence.
 		/// </summary>
-		public BigInteger Max { get; protected set; }
+		public int Max { get; protected set; }
 		/// <summary>
 		/// Returns the full list of numbers, ordered least to greatest.
 		/// </summary>
-		public List<BigInteger> Numbers { get; protected set; }
+		public List<int> Numbers { get; protected set; }
 		/// <summary>
 		/// Returns element at 0-based index.
 		/// </summary>
 		/// <remarks>
-		/// Only accepts integer indexes, even if list is longer than that.
 		/// Does not protect against out of range errors.
 		/// </remarks>
-		public BigInteger this[int index] { get { return Numbers[index]; } }
+		public int this[int index] { get { return Numbers[index]; } }
 
 		/// <summary>
 		/// Set to true if loading pre-generated data was able to confirm that all elements up the Max were loaded.
@@ -37,11 +35,11 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// List of numbers from other sources to test against.
 		/// </summary>
-		internal static BigInteger[] TestNumbers;
+		internal static int[] TestNumbers;
 
-		public Sequence(BigInteger max)
+		public Sequence(int max)
 		{
-			Numbers = new List<BigInteger>();
+			Numbers = new List<int>();
 			Max = max;
 			Initialize();
 			Load();
@@ -68,7 +66,7 @@ namespace WithoutHaste.Sequences
 		/// Returns an ordered list of the numbers that appear in both sequences.
 		/// </summary>
 		/// <exception cref='Exception'>Both sequences must have the same Max value.</exception>
-		public BigInteger[] Intersect(Sequence other)
+		public int[] Intersect(Sequence other)
 		{
 			if(this.Max != other.Max)
 				throw new Exception("Both sequences must have the same Max value.");
@@ -112,7 +110,7 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// How to apply a pre-loaded number to the collection.
 		/// </summary>
-		protected virtual void Load_AddNumber(BigInteger number)
+		protected virtual void Load_AddNumber(int number)
 		{
 			Numbers.Add(number);
 		}
@@ -134,22 +132,22 @@ namespace WithoutHaste.Sequences
 			Directory.CreateDirectory(path);
 
 			int range = Settings.SaveRangePerFile;
-			BigInteger min = 1;
-			List<List<BigInteger>> segments = BreakSequenceIntoSegments(range);
-			foreach(List<BigInteger> segment in segments)
+			int min = 1;
+			List<List<int>> segments = BreakSequenceIntoSegments(range);
+			foreach(List<int> segment in segments)
 			{
 				string filename = String.Format("{0}to{1}.{2}", min, min + range - 1, Settings.IntegerFileExtension);
 				using(BinaryWriter writer = new BinaryWriter(File.Open(Path.Combine(path, filename), FileMode.Create))) //create or overwrite
 				{
-					foreach(BigInteger number in segment)
+					foreach(int number in segment)
 					{
-						writer.Write((int)number);
+						writer.Write(number);
 					}
 				}
 				string textFilename = String.Format("{0}to{1}.txt", min, min + range - 1);
 				using(StreamWriter writer = new StreamWriter(Path.Combine(path, textFilename)))
 				{
-					foreach(BigInteger number in segment)
+					foreach(int number in segment)
 					{
 						writer.WriteLine(number);
 					}
@@ -161,17 +159,17 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// Breaks sequence into segments to save to files.
 		/// </summary>
-		private List<List<BigInteger>> BreakSequenceIntoSegments(int range)
+		private List<List<int>> BreakSequenceIntoSegments(int range)
 		{
-			List<List<BigInteger>> segments = new List<List<BigInteger>>();
-			List<BigInteger> nextSegment = new List<BigInteger>();
-			BigInteger segmentMax = range;
+			List<List<int>> segments = new List<List<int>>();
+			List<int> nextSegment = new List<int>();
+			int segmentMax = range;
 			for(int i = 0; i < this.Numbers.Count; i++)
 			{
 				if(this.Numbers[i] > segmentMax)
 				{
 					segments.Add(nextSegment);
-					nextSegment = new List<BigInteger>();
+					nextSegment = new List<int>();
 					segmentMax += range;
 				}
 				nextSegment.Add(this.Numbers[i]);

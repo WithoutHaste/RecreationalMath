@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WithoutHaste.Sequences;
-using WithoutHaste.Sequences.Tools;
 
 namespace TestSequences
 {
@@ -15,9 +11,10 @@ namespace TestSequences
 		public void TestGetPrimes_To10()
 		{
 			//arrange
-			BigInteger max = 10;
+			int max = 10;
 			//act
-			List<BigInteger> primes = SieveOfEratosthenes.GetPrimes(max);
+			Sequence sequence = new SieveOfEratosthenes(max);
+			List<int> primes = sequence.Numbers;
 			//assert
 			Assert.AreEqual(4, primes.Count);
 			Assert.AreEqual(2, primes[0]);
@@ -30,9 +27,10 @@ namespace TestSequences
 		public void TestGetPrimes_To100()
 		{
 			//arrange
-			BigInteger max = 100;
+			int max = 100;
 			//act
-			List<BigInteger> primes = SieveOfEratosthenes.GetPrimes(max);
+			Sequence sequence = new SieveOfEratosthenes(max);
+			List<int> primes = sequence.Numbers;
 			//assert
 			Assert.AreEqual(25, primes.Count);
 			Assert.AreEqual(2, primes[0]);
@@ -43,9 +41,10 @@ namespace TestSequences
 		public void TestGetPrimes_To104729()
 		{
 			//arrange
-			BigInteger max = 104729;
+			int max = 104729;
 			//act
-			List<BigInteger> primes = SieveOfEratosthenes.GetPrimes(max);
+			Sequence sequence = new SieveOfEratosthenes(max);
+			List<int> primes = sequence.Numbers;
 			//assert
 			Assert.AreEqual(10000, primes.Count);
 			Assert.AreEqual(2, primes[0]);
@@ -56,9 +55,10 @@ namespace TestSequences
 		public void TestGetPrimes_MultipleSievesRequired()
 		{
 			//arrange
-			BigInteger max = 150000000;
+			int max = 150000000;
 			//act
-			List<BigInteger> primes = SieveOfEratosthenes.GetPrimes(max);
+			Sequence sequence = new SieveOfEratosthenes(max);
+			List<int> primes = sequence.Numbers;
 			//assert no error
 		}
 	}

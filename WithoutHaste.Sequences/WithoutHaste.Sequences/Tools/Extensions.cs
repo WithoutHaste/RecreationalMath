@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Numerics;
 using System.Text.RegularExpressions;
 
 namespace WithoutHaste.Sequences.Tools
@@ -10,9 +9,9 @@ namespace WithoutHaste.Sequences.Tools
 		/// <summary>
 		/// Returns the sum of the digits of <paramref name='n'/>.
 		/// </summary>
-		internal static BigInteger SumOfDigits(this BigInteger n)
+		internal static int SumOfDigits(this int n)
 		{
-			BigInteger sum = 0;
+			int sum = 0;
 			foreach(char c in n.ToString())
 			{
 				switch(c)
@@ -35,9 +34,9 @@ namespace WithoutHaste.Sequences.Tools
 		/// <summary>
 		/// Returns the sum of the squares of the digits of <paramref name='n'/>.
 		/// </summary>
-		internal static BigInteger SumOfSquaresOfDigits(this BigInteger n)
+		internal static int SumOfSquaresOfDigits(this int n)
 		{
-			BigInteger sum = 0;
+			int sum = 0;
 			foreach(char c in n.ToString())
 			{
 				switch(c)
@@ -65,10 +64,10 @@ namespace WithoutHaste.Sequences.Tools
 		/// <remarks>
 		/// Assumes <paramref name='primes'/> contains all the necessary primes.
 		/// </remarks>
-		internal static BigInteger Primorial(this BigInteger n, BigInteger[] primes)
+		internal static int Primorial(this int n, int[] primes)
 		{
-			BigInteger primorial = 1;
-			for(BigInteger i = primes.Length - 1; i >= 0; i--)
+			int primorial = 1;
+			for(int i = primes.Length - 1; i >= 0; i--)
 			{
 				if(primes[(long)i] <= n) //todo what if i is bigger than long?
 				{

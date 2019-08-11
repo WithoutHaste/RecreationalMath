@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace WithoutHaste.Sequences
 {
@@ -10,7 +6,7 @@ namespace WithoutHaste.Sequences
 	/// The sieve of Eratosthenes is a fast computer-based method of finding prime numbers.
 	/// </summary>
 	/// <remarks>
-	/// This sieve can find all primes up to the maximum of <see cref='BigInteger'/>.
+	/// This sieve can find all primes up to the maximum of <see cref='int'/>.
 	/// </remarks>
 	public class SieveOfEratosthenes : Prime
 	{
@@ -23,19 +19,19 @@ namespace WithoutHaste.Sequences
 		private static readonly int SIEVE_LENGTH = 100000000;
 
 		private List<bool[]> sieves;
-		private BigInteger trueIndex;
+		private int trueIndex;
 		private int sieveIndex;
 		private int index;
 
 		/// <inheritdoc/>
-		public SieveOfEratosthenes(BigInteger max) : base(max)
+		public SieveOfEratosthenes(int max) : base(max)
 		{
 		}
 
 		/// <inheritdoc/>
 		protected override void Initialize()
 		{
-			int sieveCount = (int)(Max / new BigInteger(SIEVE_LENGTH)) + 1;
+			int sieveCount = (int)(Max / SIEVE_LENGTH) + 1;
 			sieves = new List<bool[]>();
 			for(int i = 0; i < sieveCount; i++)
 			{
@@ -44,13 +40,13 @@ namespace WithoutHaste.Sequences
 			sieves[0][0] = NOT_PRIME;
 			sieves[0][1] = NOT_PRIME;
 
-			trueIndex = new BigInteger(2);
+			trueIndex = 2;
 			sieveIndex = 0;
 			index = 2;
 		}
 
 		/// <inheritdoc/>
-		protected override void Load_AddNumber(BigInteger number)
+		protected override void Load_AddNumber(int number)
 		{
 			ApplyPrimeToSieves(sieves, number);
 		}
@@ -82,9 +78,9 @@ namespace WithoutHaste.Sequences
 		/// <param name="prime">The actual prime number</param>
 		/// <param name="sieveIndex">Index in <paramref name="sieves"/> of actual prime.</param>
 		/// <param name="index">Index in <c>sieves[sieveIndex]</c> of actual prime.</param>
-		private void ApplyPrimeToSieves(List<bool[]> sieves, BigInteger prime, int sieveIndex, int index)
+		private void ApplyPrimeToSieves(List<bool[]> sieves, int prime, int sieveIndex, int index)
 		{
-			BigInteger forwardIndex = new BigInteger(index);
+			int forwardIndex = index;
 			while(true)
 			{
 				forwardIndex += prime;
@@ -104,7 +100,7 @@ namespace WithoutHaste.Sequences
 		/// </summary>
 		/// <param name="sieves"></param>
 		/// <param name="prime">The actual prime number</param>
-		private void ApplyPrimeToSieves(List<bool[]> sieves, BigInteger prime)
+		private void ApplyPrimeToSieves(List<bool[]> sieves, int prime)
 		{
 			while(true)
 			{
@@ -128,11 +124,11 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// Returns a list of primes recorded in the sieves.
 		/// </summary>
-		private List<BigInteger> ExtractPrimesFromSieves()
+		private List<int> ExtractPrimesFromSieves()
 		{
-			List<BigInteger> primes = new List<BigInteger>();
+			List<int> primes = new List<int>();
 
-			BigInteger trueIndex = 2;
+			int trueIndex = 2;
 			int sieveIndex = 0;
 			int index = 2;
 			while(trueIndex <= Max && sieveIndex < sieves.Count)

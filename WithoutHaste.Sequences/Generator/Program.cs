@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using WithoutHaste.Sequences;
+﻿using WithoutHaste.Sequences;
 
 namespace Generator
 {
@@ -12,8 +6,8 @@ namespace Generator
 	{
 		static void Main(string[] args)
 		{
-			Sequence sequence = new SieveOfEratosthenes(5000000);
-			//var n1 = sequence.Numbers;
+			Sequence sequence = new SieveOfEratosthenes(10000000);
+			var n1 = sequence.Numbers;
 			sequence.Save();
 		}
 	}

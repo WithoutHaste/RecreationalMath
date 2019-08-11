@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Numerics;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WithoutHaste.Sequences;
 
