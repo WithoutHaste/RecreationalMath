@@ -31,6 +31,11 @@ namespace WithoutHaste.Sequences
 		/// <inheritdoc/>
 		protected override void Initialize()
 		{
+		}
+
+		/// <inheritdoc/>
+		protected override void Generate()
+		{
 			int sieveCount = (int)(Max / SIEVE_LENGTH) + 1;
 			sieves = new List<bool[]>();
 			for(int i = 0; i < sieveCount; i++)
@@ -43,17 +48,7 @@ namespace WithoutHaste.Sequences
 			trueIndex = 2;
 			sieveIndex = 0;
 			index = 2;
-		}
 
-		/// <inheritdoc/>
-		protected override void Load_AddNumber(int number)
-		{
-			ApplyPrimeToSieves(sieves, number);
-		}
-
-		/// <inheritdoc/>
-		protected override void Generate()
-		{
 			while(trueIndex < Max)
 			{
 				if(sieves[sieveIndex][index] == PRIME)

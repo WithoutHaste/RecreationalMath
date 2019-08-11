@@ -126,18 +126,10 @@ namespace WithoutHaste.Sequences
 							loadReachedMax = true;
 							break;
 						}
-						Load_AddNumber(number);
+						Numbers.Add(number);
 					}
 				}
 			}
-		}
-
-		/// <summary>
-		/// How to apply a pre-loaded number to the collection.
-		/// </summary>
-		protected virtual void Load_AddNumber(int number)
-		{
-			Numbers.Add(number);
 		}
 
 		/// <summary>
