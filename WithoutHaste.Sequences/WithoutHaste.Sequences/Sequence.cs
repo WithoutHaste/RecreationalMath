@@ -87,7 +87,7 @@ namespace WithoutHaste.Sequences
 			string path = Path.Combine(Settings.SaveToDirectory, GetSaveToFolder());
 			if(!Directory.Exists(path))
 				return;
-			string[] filenames = Directory.GetFiles(path).Select(f => Path.GetFileName(f)).ToArray();
+			string[] filenames = Directory.GetFiles(path).Where(f => Path.GetExtension(f) == Settings.IntegerFileExtension).Select(f => Path.GetFileName(f)).ToArray();
 			Array.Sort(filenames, new StartsWithNumberComparer());
 			foreach(string filename in filenames)
 			{
@@ -136,7 +136,7 @@ namespace WithoutHaste.Sequences
 			List<List<int>> segments = BreakSequenceIntoSegments(range);
 			foreach(List<int> segment in segments)
 			{
-				string filename = String.Format("{0}to{1}.{2}", min, min + range - 1, Settings.IntegerFileExtension);
+				string filename = String.Format("{0}to{1}{2}", min, min + range - 1, Settings.IntegerFileExtension);
 				using(BinaryWriter writer = new BinaryWriter(File.Open(Path.Combine(path, filename), FileMode.Create))) //create or overwrite
 				{
 					foreach(int number in segment)

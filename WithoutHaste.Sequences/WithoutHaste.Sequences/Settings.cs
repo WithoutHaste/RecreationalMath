@@ -26,6 +26,9 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// File extension for binary-format integer files.
 		/// </summary>
-		public static string IntegerFileExtension = "int";
+		/// <remarks>
+		/// Include the period at the beginning.
+		/// </remarks>
+		public static string IntegerFileExtension = ".int";
 	}
 }
