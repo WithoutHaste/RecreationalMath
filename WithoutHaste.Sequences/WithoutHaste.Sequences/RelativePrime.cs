@@ -21,13 +21,9 @@ namespace WithoutHaste.Sequences
 
 		protected override void Generate()
 		{
-			List<int> primes = (new SieveOfEratosthenes(Max + X)).Numbers;
-			int maxPreloaded = (Numbers.Count > 0) ? Numbers.Last() : 0;
-			for(int i = 0; i < primes.Count && primes[i] <= Max; i++)
+			Sequence primes = new SieveOfEratosthenes(Max + X);
+			foreach(int prime in primes.InRange(LastNumber, Max))
 			{
-				int prime = primes[i];
-				if(prime <= maxPreloaded)
-					continue;
 				int p2 = prime + X;
 				int p3 = prime - X;
 				if(primes.Contains(p2) || primes.Contains(p3))

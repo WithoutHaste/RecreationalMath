@@ -26,6 +26,10 @@ namespace WithoutHaste.Sequences
 		/// Does not protect against out of range errors.
 		/// </remarks>
 		public int this[int index] { get { return Numbers[index]; } }
+		/// <summary>
+		/// Returns the last number in the sequence, which will also be the highest number, or 0 if the sequence is empty.
+		/// </summary>
+		public int LastNumber { get { return (Numbers.Count == 0) ? 0 : Numbers.Last(); } }
 
 		/// <summary>
 		/// Set to true if loading pre-generated data was able to confirm that all elements up the Max were loaded.
@@ -61,6 +65,27 @@ namespace WithoutHaste.Sequences
 		/// Generates the full list of numbers.
 		/// </summary>
 		protected abstract void Generate();
+
+		/// <summary>
+		/// Returns true if <paramref name="n"/> is in the sequence.
+		/// </summary>
+		public bool Contains(int n)
+		{
+			return Numbers.Contains(n);
+		}
+
+		/// <summary>
+		/// Iterate through sequence, within the specified range.
+		/// </summary>
+		public IEnumerable<int> InRange(int min, int max)
+		{
+			for(int i = 0; i < Numbers.Count && Numbers[i] <= max; i++)
+			{
+				if(Numbers[i] < min)
+					continue;
+				yield return Numbers[i];
+			}
+		}
 
 		/// <summary>
 		/// Returns an ordered list of the numbers that appear in both sequences.

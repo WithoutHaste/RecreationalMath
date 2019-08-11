@@ -19,13 +19,9 @@ namespace WithoutHaste.Sequences
 
 		protected override void Generate()
 		{
-			List<int> primes = (new SieveOfEratosthenes(Max)).Numbers;
-			int maxPreloaded = (Numbers.Count > 0) ? Numbers.Last() : 0;
-			for(int i = 0; i < primes.Count; i++)
+			Sequence primes = new SieveOfEratosthenes(Max);
+			foreach(int prime in primes.InRange(LastNumber, Max))
 			{
-				int prime = primes[i];
-				if(prime <= maxPreloaded)
-					continue;
 				int sumOfDigits = prime.SumOfDigits();
 				if(primes.Contains(sumOfDigits)) //sum of digits is guaranteed to be equal or lesser number, so its in the prime collection
 				{

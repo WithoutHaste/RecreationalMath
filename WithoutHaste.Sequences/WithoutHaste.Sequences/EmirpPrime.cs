@@ -19,19 +19,15 @@ namespace WithoutHaste.Sequences
 
 		protected override void Generate()
 		{
-			List<int> primes = (new SieveOfEratosthenes(Max * 10)).Numbers; //going order of magnitude higher than prime because reversing prime could end up with a higher number; ex: 17 => 71
-			int maxPreloaded = (Numbers.Count > 0) ? Numbers.Last() : 0;
-			for(int i = 0; i < primes.Count && primes[i] <= Max; i++)
+			Sequence primes = new SieveOfEratosthenes(Max * 10); //going order of magnitude higher than prime because reversing prime could end up with a higher number; ex: 17 => 71
+			foreach(int prime in primes.InRange(LastNumber, Max))
 			{
-				int prime = primes[i];
-				if(prime <= maxPreloaded)
-					continue;
 				if(IsEmirpPrime(prime, primes))
 					Numbers.Add(prime);
 			}
 		}
 
-		private bool IsEmirpPrime(int prime, List<int> primes)
+		private bool IsEmirpPrime(int prime, Sequence primes)
 		{
 			string s = String.Join("", prime.ToString().ToArray().Select(c => c.ToString()).Reverse().ToArray());
 			int p2 = Int32.Parse(s);
