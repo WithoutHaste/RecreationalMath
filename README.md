@@ -23,3 +23,4 @@ TODO: rename repository to WithoutHaste.Math
 TODO: rename this solution to WithoutHaste.Math.Sequences  
 TODO: primes - load pre-generated into list, if it doesn't reach max just discard that and to the whole sieve over again - don't think I'm getting a speed benefit as is - therefore don't allocate memory for sieve until numbers are pre-loaded
 TODO: how to make use Max+? operations don't overflow Int32? comes up in various sequences that need more primes then they themselves contain
+TODO: emirp prime: how to verify big-number primes are emirp or not if the reversed number is beyond the edge of the prime list? beyond int max?

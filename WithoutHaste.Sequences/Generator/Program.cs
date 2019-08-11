@@ -13,7 +13,8 @@ namespace Generator
 			//Sequence sequence = new Happy(200000);
 			//Sequence sequence = new AdditivePrime(200000);
 			//Sequence sequence = new CircularPrime(200000);
-			Sequence sequence = new CousinPrime(200000);
+			//Sequence sequence = new CousinPrime(200000);
+			Sequence sequence = new EmirpPrime(200000);
 			var n1 = sequence.Numbers;
 			sequence.Save();
 
