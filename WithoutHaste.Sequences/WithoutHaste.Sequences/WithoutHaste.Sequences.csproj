@@ -75,7 +75,7 @@
     <Compile Include="PythagoreanPrime.cs" />
     <Compile Include="QuadrupletPrime.cs" />
     <Compile Include="RamanujanPrime.cs" />
-    <Compile Include="RelativePrime.cs" />
+    <Compile Include="RelatedPrime.cs" />
     <Compile Include="RightTruncatablePrime.cs" />
     <Compile Include="SafePrime.cs" />
     <Compile Include="SelfPrime.cs" />

@@ -8,14 +8,14 @@ namespace WithoutHaste.Sequences
 	/// A prime where p + x is also prime, or p - x is also prime (both sides of pair are saved).
 	/// Includes twin primes, cousin primes, and sexy primes.
 	/// </summary>
-	public abstract class RelativePrime : Sequence
+	public abstract class RelatedPrime : Sequence
 	{
 		/// <summary>
 		/// The constant to add to each prime. Ex: Cousin Primes use x = 4.
 		/// </summary>
 		protected virtual int X { get; }
 
-		public RelativePrime(int max) : base(max)
+		public RelatedPrime(int max) : base(max)
 		{
 		}
 
