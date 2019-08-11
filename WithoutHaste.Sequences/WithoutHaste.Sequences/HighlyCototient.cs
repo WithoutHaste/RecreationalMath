@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Linq;
 
-
 namespace WithoutHaste.Sequences
 {
 	/*
@@ -19,20 +18,15 @@ namespace WithoutHaste.Sequences
 	public class HighlyCototient : Sequence
 	{
 		/// <inheritdoc/>
-		public override BigInteger[] Numbers { get { return (BigInteger[])numbers.Clone(); } }
-		private BigInteger[] numbers;
+		internal static new int[] TestNumbers = new int[] { 2, 4, 8, 23, 35, 47, 59, 63, 83, 89, 113, 119, 167, 209, 269, 299, 329, 389, 419, 509, 629, 659, 779, 839, 1049, 1169, 1259, 1469, 1649, 1679, 1889 };
 
-		/// <inheritdoc/>
-		internal static new BigInteger[] TestNumbers = new BigInteger[] { 2, 4, 8, 23, 35, 47, 59, 63, 83, 89, 113, 119, 167, 209, 269, 299, 329, 389, 419, 509, 629, 659, 779, 839, 1049, 1169, 1259, 1469, 1649, 1679, 1889 };
-
-		public HighlyCototient(BigInteger max) : base(max)
+		public HighlyCototient(int max) : base(max)
 		{
 		}
 
 		protected override void Generate()
 		{
-			PrimeFactors.QuickFactorize(Max * Max); //prep cache
-			//Prime prime = new Prime(Max * Max); //prep cache
+			PrimeFactors primeFactors = new PrimeFactors(Max * Max);
 
 			List<BigInteger> highlyCototient = new List<BigInteger>();
 			List<BigInteger> solutions = new List<BigInteger>(); //correlated to previous list; number of solutions
