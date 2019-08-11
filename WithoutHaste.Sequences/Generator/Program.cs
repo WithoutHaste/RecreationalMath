@@ -8,7 +8,8 @@ namespace Generator
 		static void Main(string[] args)
 		{
 			//Sequence sequence = new SieveOfEratosthenes(Int32.MaxValue); //out of memory exception adding 15th sieve
-			Sequence sequence = new SieveOfEratosthenes(Int32.MaxValue / 2); //ran into EndOfStreamException when loading pre-generated values
+			//Sequence sequence = new SieveOfEratosthenes(Int32.MaxValue / 2); //ran into EndOfStreamException when loading pre-generated values
+			Sequence sequence = new Happy(100000);
 			var n1 = sequence.Numbers;
 			sequence.Save();
 		}
