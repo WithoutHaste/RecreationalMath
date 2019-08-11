@@ -23,8 +23,10 @@ namespace WithoutHaste.Sequences
 		protected override void Generate()
 		{
 			List<int> happys = new List<int>();
+			happys.AddRange(Numbers);
 			List<int> notHappys = new List<int>();
-			for(int i = 1; i <= Max; i++)
+			int firstTerm = (happys.Count == 0) ? 1 : happys.Last() + 1;
+			for(int i = firstTerm; i <= Max; i++)
 			{
 				int n = i;
 				List<int> route = new List<int>() { n };
