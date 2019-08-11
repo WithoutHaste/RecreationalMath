@@ -18,8 +18,9 @@ namespace Generator
 			//Sequence sequence = new CircularPrime(200000);
 			//Sequence sequence = new CousinPrime(200000);
 			//Sequence sequence = new EmirpPrime(200000);
-			Sequence sequence = new HiggsPrime(200000);
-			sequence.Save();
+			//Sequence sequence = new HiggsPrime(200000);
+			PrimeFactors primeFactors = new PrimeFactors(200000);
+			//sequence.Save();
 
 			Console.WriteLine("Done");
 			Console.ReadLine();

@@ -1,105 +1,144 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
-
+using WithoutHaste.Sequences.Tools;
 
 namespace WithoutHaste.Sequences
 {
-	/*
 	/// <summary>
 	/// Calculates the prime factors of integers.
 	/// </summary>
-	public static class PrimeFactors
+	public class PrimeFactors
 	{
+		private const string TEXT_FILE_EXTENSION = ".txt";
+		private const char FIELD_DELIMITER = ':';
+		private const char FACTOR_DELIMITER = ',';
+
+		/// <summary>
+		/// Maximum number factorized.
+		/// </summary>
+		public int Max { get; private set; }
+
 		/// <summary>
 		/// Dict[N] = ordered list of distinct prime factors of N
 		/// </summary>
-		private static Dictionary<BigInteger, List<BigInteger>> CacheFactors = new Dictionary<BigInteger, List<BigInteger>>() { { 1, new List<BigInteger>() } };
+		public Dictionary<int, int[]> Factors;
+
+		/// <summary>
+		/// Set to true if loading pre-generated data was able to confirm that all elements up the Max were loaded.
+		/// </summary>
+		private bool loadReachedMax = false;
+
+		public PrimeFactors(int max)
+		{
+			Max = max;
+			Factors = new Dictionary<int, int[]>();
+			Load();
+			if(loadReachedMax)
+				return;
+			Generate();
+			Save();
+		}
 
 		/// <summary>
 		/// Returns an ordered array of the distinct prime factors of <paramref name='n'/>.
 		/// </summary>
 		/// <exception cref='ArgumentException'><paramref name='n'/> must be greater than 0.</exception>
-		public static BigInteger[] Lookup(BigInteger n)
+		public int[] Lookup(int n)
 		{
-			Factorize(n);
-			return CacheFactors[n].ToArray();
+			if(n < 1 || n > Max)
+				throw new ArgumentException("Range is 1 to " + Max + ".");
+			return Factors[n].ToArray();
 		}
 
 		/// <summary>
 		/// Use method similar to Seive Of Eristothenes to quickly factorize all numbers from 1 to <paramref name='max'/>.
 		/// Starts with an empty cache.
 		/// </summary>
-		public static void QuickFactorize(BigInteger max)
+		private void Generate()
 		{
-			Debug.WriteLine("Quick factorize to " + max);
+			List<int>[] factors = new List<int>[Max + 1];
 
-			CacheFactors = new Dictionary<BigInteger, List<BigInteger>>() { { 1, new List<BigInteger>() } };
-
-			bool[] seiveOfEristothenes = new bool[(long)max + 1]; //true is prime //todo what if seive is longer than int or long allow?
-			for(BigInteger i = 0; i < seiveOfEristothenes.Length; i++)
+			bool[] seiveOfEristothenes = new bool[Max + 1]; //true is prime
+			for(int i = 0; i < seiveOfEristothenes.Length; i++)
 			{
-				seiveOfEristothenes[(long)i] = true;
+				seiveOfEristothenes[i] = true;
 			}
 			seiveOfEristothenes[0] = false;
 			seiveOfEristothenes[1] = false;
-			for(BigInteger i = 2; i < seiveOfEristothenes.Length; i++)
+			for(int i = 2; i < seiveOfEristothenes.Length; i++)
 			{
-				if(seiveOfEristothenes[(long)i] == false)
+				if(seiveOfEristothenes[i] == false)
 					continue;
-				if(!CacheFactors.ContainsKey(i))
-					CacheFactors[i] = new List<BigInteger>() { i };
-				for(BigInteger j = i + i; j < seiveOfEristothenes.Length; j += i)
+				for(int j = i + i; j < seiveOfEristothenes.Length; j += i)
 				{
-					seiveOfEristothenes[(long)j] = false;
-					if(!CacheFactors.ContainsKey(j))
-						CacheFactors[j] = new List<BigInteger>();
-					CacheFactors[j].Add(i);
+					seiveOfEristothenes[j] = false;
+					if(factors[j] == null)
+						factors[j] = new List<int>();
+					factors[j].Add(i);
+				}
+			}
+
+			Factors.Clear();
+			for(int i = 1; i < factors.Length; i++)
+			{
+				Factors[i] = (factors[i] == null) ? new int[0] : factors[i].ToArray();
+			}
+		}
+
+		private void Load()
+		{
+			string path = Path.Combine(Settings.SaveToDirectory, GetSaveToFolder());
+			if(!Directory.Exists(path))
+				return;
+			string[] filenames = Directory.GetFiles(path).Select(f => Path.GetFileName(f)).ToArray();
+			Array.Sort(filenames, new StartsWithNumberComparer());
+			foreach(string filename in filenames)
+			{
+				string[] lines = File.ReadAllLines(Path.Combine(path, filename));
+				foreach(string line in lines)
+				{
+					string[] fields = line.Split(FIELD_DELIMITER);
+					int number = Int32.Parse(fields[0]);
+					if(fields.Length == 1 || String.IsNullOrEmpty(fields[1]))
+					{
+						Factors[number] = new int[0];
+						continue;
+					}
+					string[] factorFields = fields[1].Split(FACTOR_DELIMITER);
+					Factors[number] = factorFields.Select(n => Int32.Parse(n)).ToArray();
 				}
 			}
 		}
 
-		private static void Factorize(BigInteger n)
+		private void Save()
 		{
-			if(n <= 0)
-				throw new ArgumentException("Number must be greater than 0.");
-			if(CacheFactors.ContainsKey(n))
-				return;
+			string path = Path.Combine(Settings.SaveToDirectory, GetSaveToFolder());
+			Directory.CreateDirectory(path);
 
-			Debug.WriteLine("Factorize " + n);
-
-			Prime prime;
-			if(Prime.CacheMax < n)
-				prime = new Prime(n + 1000); //generate a lot at once to save time - expected repeated queries
-			else
-				prime = new Prime(n); //must go up to n in case it is prime
-
-			if(prime.Contains(n))
+			int range = 200000;
+			int min = 1;
+			int[] keys = Factors.Keys.OrderBy(n => n).ToArray();
+			for(int i = 0; i < keys.Length; i+=range)
 			{
-				CacheFactors[n] = new List<BigInteger>() { n };
-				return;
-			}
-			List<BigInteger> primeFactors = new List<BigInteger>();
-			BigInteger nWorking = n + 0; //clone
-			foreach(BigInteger p in prime.Numbers)
-			{
-				if(nWorking == 1)
-					break;
-				if(CacheFactors.ContainsKey(nWorking))
+				int rangeMax = min + range - 1;
+				if(i + range >= keys.Length)
+					rangeMax = Max;
+				string filename = String.Format("{0}to{1}{2}", min, rangeMax, TEXT_FILE_EXTENSION);
+				using(StreamWriter writer = new StreamWriter(Path.Combine(path, filename)))
 				{
-					primeFactors.AddRange(CacheFactors[nWorking]);
-					break;
-				}
-				if(nWorking % p == 0)
-				{
-					primeFactors.Add(p);
-					while(nWorking % p == 0)
-						nWorking = nWorking / p;
+					for(int j = i; j < keys.Length && j < i + range; j++)
+					{
+						writer.WriteLine(String.Format("{0}{1}{2}", keys[j], FIELD_DELIMITER, String.Join(FACTOR_DELIMITER.ToString(), Factors[keys[j]])));
+					}
 				}
 			}
-			CacheFactors[n] = primeFactors.Distinct().OrderBy(x => x).ToList();
+		}
+
+		private string GetSaveToFolder()
+		{
+			return "PrimeFactor";
 		}
 	}
-	*/
 }
