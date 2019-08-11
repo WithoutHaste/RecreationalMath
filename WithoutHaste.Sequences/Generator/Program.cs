@@ -19,8 +19,9 @@ namespace Generator
 			//Sequence sequence = new CousinPrime(200000);
 			//Sequence sequence = new EmirpPrime(200000);
 			//Sequence sequence = new HiggsPrime(200000);
-			PrimeFactors primeFactors = new PrimeFactors(200000);
-			//sequence.Save();
+			//PrimeFactors primeFactors = new PrimeFactors(200000);
+			Sequence sequence = new Lucky(200000);
+			sequence.Save();
 
 			Console.WriteLine("Done");
 			Console.ReadLine();
