@@ -134,9 +134,13 @@ namespace WithoutHaste.Sequences
 			int range = Settings.SaveRangePerFile;
 			int min = 1;
 			List<List<int>> segments = BreakSequenceIntoSegments(range);
-			foreach(List<int> segment in segments)
+			for(int i = 0; i < segments.Count; i++)
 			{
-				string filename = String.Format("{0}to{1}{2}", min, min + range - 1, Settings.IntegerFileExtension);
+				List<int> segment = segments[i];
+				int rangeMax = min + range - 1;
+				if(i == segments.Count - 1)
+					rangeMax = Max;
+				string filename = String.Format("{0}to{1}{2}", min, rangeMax, Settings.IntegerFileExtension);
 				using(BinaryWriter writer = new BinaryWriter(File.Open(Path.Combine(path, filename), FileMode.Create))) //create or overwrite
 				{
 					foreach(int number in segment)
@@ -144,7 +148,7 @@ namespace WithoutHaste.Sequences
 						writer.Write(number);
 					}
 				}
-				string textFilename = String.Format("{0}to{1}.txt", min, min + range - 1);
+				string textFilename = String.Format("{0}to{1}.txt", min, rangeMax);
 				using(StreamWriter writer = new StreamWriter(Path.Combine(path, textFilename)))
 				{
 					foreach(int number in segment)

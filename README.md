@@ -21,5 +21,4 @@ GitHub has something like a 5mb file size limit, and my projected usage for this
 
 TODO: rename repository to WithoutHaste.Math  
 TODO: rename this solution to WithoutHaste.Math.Sequences  
-TODO: if sequence max is less than file-range-max, save file with correct range-name
 TODO: primes - load pre-generated into list, if it doesn't reach max just discard that and to the whole sieve over again - don't think I'm getting a speed benefit as is
