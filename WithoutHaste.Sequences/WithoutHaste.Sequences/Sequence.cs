@@ -126,6 +126,14 @@ namespace WithoutHaste.Sequences
 		}
 
 		/// <summary>
+		/// Returns the difference of the sequences: this minus <paramref name='other'/>.
+		/// </summary>
+		public Difference Difference(Sequence other)
+		{
+			return new Difference(this, other);
+		}
+
+		/// <summary>
 		/// Folder to contain all files related to this sequence.
 		/// </summary>
 		public abstract string GetSaveToFolder();

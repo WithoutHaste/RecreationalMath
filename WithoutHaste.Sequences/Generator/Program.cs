@@ -29,7 +29,8 @@ namespace Generator
 			//Sequence intersection2 = sequence3.Intersect(intersection);
 			//intersection2.Save();
 
-			Sequence sequence = new TwinPrime(2000000);
+			//Sequence sequence = new TwinPrime(2000000);
+			Sequence sequence = new IsolatedPrime(2000000);
 			sequence.Save();
 
 			Console.WriteLine("Done");
