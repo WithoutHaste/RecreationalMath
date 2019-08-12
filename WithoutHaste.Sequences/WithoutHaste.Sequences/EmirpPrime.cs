@@ -36,7 +36,7 @@ namespace WithoutHaste.Sequences
 			return (primes.Contains(p2));
 		}
 
-		protected override string GetSaveToFolder()
+		public override string GetSaveToFolder()
 		{
 			return "Prime_Emirp";
 		}

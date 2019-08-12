@@ -21,7 +21,12 @@ namespace Generator
 			//Sequence sequence = new HiggsPrime(200000);
 			//PrimeFactors primeFactors = new PrimeFactors(200000);
 			Sequence sequence = new Lucky(200000);
-			sequence.Save();
+			Sequence sequence2 = new SieveOfEratosthenes(300000);
+			Sequence intersection = sequence.Intersect(sequence2);
+			intersection.Save();
+			Sequence sequence3 = new Happy(200000);
+			Sequence intersection2 = sequence3.Intersect(intersection);
+			intersection2.Save();
 
 			Console.WriteLine("Done");
 			Console.ReadLine();

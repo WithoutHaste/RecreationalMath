@@ -49,7 +49,7 @@ namespace WithoutHaste.Sequences
 			Numbers = happys.Distinct().OrderBy(n => n).ToList();
 		}
 
-		protected override string GetSaveToFolder()
+		public override string GetSaveToFolder()
 		{
 			return "Happy";
 		}

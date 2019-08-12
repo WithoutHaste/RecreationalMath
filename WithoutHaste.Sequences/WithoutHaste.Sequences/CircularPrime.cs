@@ -54,7 +54,7 @@ namespace WithoutHaste.Sequences
 			return false;
 		}
 
-		protected override string GetSaveToFolder()
+		public override string GetSaveToFolder()
 		{
 			return "Prime_Circular";
 		}

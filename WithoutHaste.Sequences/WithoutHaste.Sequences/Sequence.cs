@@ -41,6 +41,15 @@ namespace WithoutHaste.Sequences
 		/// </summary>
 		internal static int[] TestNumbers;
 
+		public Sequence()
+		{
+		}
+
+		/// <summary>
+		/// Try loading pre-generated values first.
+		/// If that is insufficient, generate the values.
+		/// </summary>
+		/// <param name="max"></param>
 		public Sequence(int max)
 		{
 			Numbers = new List<int>();
@@ -50,6 +59,24 @@ namespace WithoutHaste.Sequences
 			if(loadReachedMax)
 				return;
 			Generate();
+		}
+
+		/// <summary>
+		/// Only load pre-generated values. Do not attempt to generate values.
+		/// </summary>
+		/// <remarks>
+		/// If the specified <paramref name='max'/> cannot be reached or exceeded, the recorded <see cref='Max'/> will be decreased to the highest confirmed value.
+		/// </remarks>
+		public Sequence(int max, string loadFromFolder)
+		{
+			Numbers = new List<int>();
+			Max = max;
+			Initialize();
+			Load(loadFromFolder);
+			if(!loadReachedMax)
+			{
+				Max = (Numbers.Count > 0) ? Numbers.Last() : 0;
+			}
 		}
 
 		/// <summary>
@@ -64,7 +91,10 @@ namespace WithoutHaste.Sequences
 		/// <summary>
 		/// Generates the full list of numbers.
 		/// </summary>
-		protected abstract void Generate();
+		protected virtual void Generate()
+		{
+			//no statement
+		}
 
 		/// <summary>
 		/// Returns true if <paramref name="n"/> is in the sequence.
@@ -88,28 +118,27 @@ namespace WithoutHaste.Sequences
 		}
 
 		/// <summary>
-		/// Returns an ordered list of the numbers that appear in both sequences.
+		/// Returns an intersection of the sequences.
 		/// </summary>
-		/// <exception cref='Exception'>Both sequences must have the same Max value.</exception>
-		public int[] Intersect(Sequence other)
+		public Intersection Intersect(Sequence other)
 		{
-			if(this.Max != other.Max)
-				throw new Exception("Both sequences must have the same Max value.");
-			return this.Numbers.Intersect(other.Numbers).OrderBy(x => x).ToArray();
+			return new Intersection(this, other);
 		}
 
 		/// <summary>
 		/// Folder to contain all files related to this sequence.
 		/// </summary>
-		protected abstract string GetSaveToFolder();
+		public abstract string GetSaveToFolder();
 
 		/// <summary>
 		/// Load pre-generated data from file(s).
 		/// Assumes files contain every element in the sequence in the file's range.
 		/// </summary>
-		private void Load()
+		private void Load(string loadFromFolder = null)
 		{
-			string path = Path.Combine(Settings.SaveToDirectory, GetSaveToFolder());
+			if(loadFromFolder == null)
+				loadFromFolder = GetSaveToFolder();
+			string path = Path.Combine(Settings.SaveToDirectory, loadFromFolder);
 			if(!Directory.Exists(path))
 				return;
 			string[] filenames = Directory.GetFiles(path).Where(f => Path.GetExtension(f) == Settings.IntegerFileExtension).Select(f => Path.GetFileName(f)).ToArray();

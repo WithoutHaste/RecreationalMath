@@ -50,7 +50,7 @@ namespace WithoutHaste.Sequences
 			return multiple;
 		}
 
-		protected override string GetSaveToFolder()
+		public override string GetSaveToFolder()
 		{
 			return "Lucky";
 		}

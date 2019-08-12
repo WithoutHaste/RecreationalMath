@@ -30,7 +30,7 @@ namespace WithoutHaste.Sequences
 			}
 		}
 
-		protected override string GetSaveToFolder()
+		public override string GetSaveToFolder()
 		{
 			return "Prime_Additive";
 		}

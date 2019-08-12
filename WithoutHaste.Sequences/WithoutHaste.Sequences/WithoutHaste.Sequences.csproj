@@ -52,6 +52,7 @@
     <Compile Include="CousinPrime.cs" />
     <Compile Include="EisensteinPrime.cs" />
     <Compile Include="EmirpPrime.cs" />
+    <Compile Include="Intersection.cs" />
     <Compile Include="Lucky.cs" />
     <Compile Include="Tools\Extensions.cs" />
     <Compile Include="FortunatePrime.cs" />

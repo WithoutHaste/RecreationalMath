@@ -53,7 +53,7 @@ namespace WithoutHaste.Sequences
 			return product;
 		}
 
-		protected override string GetSaveToFolder()
+		public override string GetSaveToFolder()
 		{
 			return "Prime_Higgs";
 		}
