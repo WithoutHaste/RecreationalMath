@@ -134,6 +134,14 @@ namespace WithoutHaste.Sequences
 		}
 
 		/// <summary>
+		/// Returns the union of the sequences.
+		/// </summary>
+		public Union Union(Sequence other)
+		{
+			return new Union(this, other);
+		}
+
+		/// <summary>
 		/// Folder to contain all files related to this sequence.
 		/// </summary>
 		public abstract string GetSaveToFolder();

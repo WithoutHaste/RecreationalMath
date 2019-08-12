@@ -92,6 +92,7 @@
     <Compile Include="TripletPrime.cs" />
     <Compile Include="TwinPrime.cs" />
     <Compile Include="UlamPrime.cs" />
+    <Compile Include="Union.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
