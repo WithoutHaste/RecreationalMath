@@ -20,13 +20,17 @@ namespace Generator
 			//Sequence sequence = new EmirpPrime(200000);
 			//Sequence sequence = new HiggsPrime(200000);
 			//PrimeFactors primeFactors = new PrimeFactors(200000);
-			Sequence sequence = new Lucky(200000);
-			Sequence sequence2 = new SieveOfEratosthenes(300000);
-			Sequence intersection = sequence.Intersect(sequence2);
-			intersection.Save();
-			Sequence sequence3 = new Happy(200000);
-			Sequence intersection2 = sequence3.Intersect(intersection);
-			intersection2.Save();
+
+			//Sequence sequence = new Lucky(200000);
+			//Sequence sequence2 = new SieveOfEratosthenes(300000);
+			//Sequence intersection = sequence.Intersect(sequence2);
+			//intersection.Save();
+			//Sequence sequence3 = new Happy(200000);
+			//Sequence intersection2 = sequence3.Intersect(intersection);
+			//intersection2.Save();
+
+			Sequence sequence = new TwinPrime(2000000);
+			sequence.Save();
 
 			Console.WriteLine("Done");
 			Console.ReadLine();
