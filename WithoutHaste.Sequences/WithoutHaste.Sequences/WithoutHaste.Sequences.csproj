@@ -64,9 +64,9 @@
     <Compile Include="Ignore\CarolPrime.cs" />
     <Compile Include="IrregularPrime.cs" />
     <Compile Include="IsolatedPrime.cs" />
-    <Compile Include="LeftTruncatablePrime.cs" />
-    <Compile Include="LongPrime.cs" />
-    <Compile Include="PalindromicPrime.cs" />
+    <Compile Include="Ignore\LeftTruncatablePrime.cs" />
+    <Compile Include="Ignore\LongPrime.cs" />
+    <Compile Include="Palindrome.cs" />
     <Compile Include="PillaiPrime.cs" />
     <Compile Include="Prime.cs" />
     <Compile Include="PrimeFactors.cs" />
