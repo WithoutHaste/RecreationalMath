@@ -130,12 +130,26 @@ namespace WithoutHaste.Sequences.Tools
 					return true;
 				}
 		*/
+
 		/// <summary>
 		/// If <pararef name="s"/> starts with a number, it is parsed into an integer and returned. Zero is returned by default.
 		/// </summary>
 		internal static int GetStartingNumber(string s)
 		{
 			Match match = Regex.Match(s, @"^\d+");
+			int result = 0;
+			if(!match.Success)
+				return result;
+			Int32.TryParse(match.Value, out result);
+			return result;
+		}
+
+		/// <summary>
+		/// If <pararef name="s"/> ends with a number, it is parsed into an integer and returned. Zero is returned by default.
+		/// </summary>
+		internal static int GetEndingNumber(string s)
+		{
+			Match match = Regex.Match(s, @"\d+$");
 			int result = 0;
 			if(!match.Success)
 				return result;

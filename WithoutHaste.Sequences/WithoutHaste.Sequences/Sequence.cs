@@ -174,6 +174,8 @@ namespace WithoutHaste.Sequences
 						Numbers.Add(number);
 					}
 				}
+				if(Extensions.GetEndingNumber(Path.GetFileNameWithoutExtension(filename)) >= Max)
+					loadReachedMax = true;
 			}
 		}
 
