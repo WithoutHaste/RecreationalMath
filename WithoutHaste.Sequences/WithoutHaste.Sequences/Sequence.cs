@@ -142,6 +142,16 @@ namespace WithoutHaste.Sequences
 		}
 
 		/// <summary>
+		/// Only saves files if loading data from file was insufficient.
+		/// </summary>
+		public void SaveIfNecessary()
+		{
+			if(loadReachedMax)
+				return;
+			Save();
+		}
+
+		/// <summary>
 		/// Save sequence to file(s).
 		/// </summary>
 		/// <remarks>
