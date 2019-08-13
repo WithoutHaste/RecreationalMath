@@ -1,37 +1,20 @@
 ﻿using System;
 using System.Linq;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WithoutHaste.Sequences;
 
 namespace TestSequences
 {
-	/*
 	[TestClass]
 	public class TestSequences
 	{
 		/// <summary>
 		/// Assert that the numbers generated are exactly equal to the expected results.
 		/// </summary>
-		private void TestSequence(Sequence sequence, BigInteger[] expected)
+		private void TestSequence(Sequence sequence, int[] expected)
 		{
 			//act
-			BigInteger[] results = sequence.Numbers;
-			//assert
-			Assert.AreEqual(expected.Length, results.Length);
-			for(int i = 0; i < expected.Length; i++)
-			{
-				Assert.AreEqual(expected[i], results[i]);
-			}
-		}
-
-		/// <summary>
-		/// Assert that the numbers generated are exactly equal to the expected results.
-		/// </summary>
-		private void TestIntersection(Sequence sequenceA, Sequence sequenceB, BigInteger[] expected)
-		{
-			//act
-			BigInteger[] results = sequenceA.Intersect(sequenceB);
+			int[] results = sequence.Numbers.ToArray();
 			//assert
 			Assert.AreEqual(expected.Length, results.Length);
 			for(int i = 0; i < expected.Length; i++)
@@ -44,8 +27,8 @@ namespace TestSequences
 		public void TestPrime()
 		{
 			//arrange
-			BigInteger[] expected = Prime.TestNumbers;
-			Prime sequence = new Prime(expected.Last());
+			int[] expected = Prime.TestNumbers;
+			Prime sequence = new SieveOfEratosthenes(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
 		}
@@ -54,7 +37,7 @@ namespace TestSequences
 		public void TestAdditivePrime()
 		{
 			//arrange
-			BigInteger[] expected = AdditivePrime.TestNumbers;
+			int[] expected = AdditivePrime.TestNumbers;
 			AdditivePrime sequence = new AdditivePrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -64,19 +47,19 @@ namespace TestSequences
 		public void TestCircularPrime()
 		{
 			//arrange
-			BigInteger[] expected = CircularPrime.TestNumbers;
+			int[] expected = CircularPrime.TestNumbers;
 			CircularPrime sequence = new CircularPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
 		}
 
-		#region RelativePrime
+		#region RelatedPrime
 
 		[TestMethod]
 		public void TestTwinPrime()
 		{
 			//arrange
-			BigInteger[] expected = TwinPrime.TestNumbers;
+			int[] expected = TwinPrime.TestNumbers;
 			TwinPrime sequence = new TwinPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -86,7 +69,7 @@ namespace TestSequences
 		public void TestCousinPrime()
 		{
 			//arrange
-			BigInteger[] expected = CousinPrime.TestNumbers;
+			int[] expected = CousinPrime.TestNumbers;
 			CousinPrime sequence = new CousinPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -96,8 +79,28 @@ namespace TestSequences
 		public void TestSexyPrime()
 		{
 			//arrange
-			BigInteger[] expected = SexyPrime.TestNumbers;
+			int[] expected = SexyPrime.TestNumbers;
 			SexyPrime sequence = new SexyPrime(expected.Last());
+			//act assert
+			TestSequence(sequence, expected);
+		}
+
+		[TestMethod]
+		public void TestIsolatedPrime()
+		{
+			//arrange
+			int[] expected = IsolatedPrime.TestNumbers;
+			IsolatedPrime sequence = new IsolatedPrime(expected.Last());
+			//act assert
+			TestSequence(sequence, expected);
+		}
+
+		[TestMethod]
+		public void TestTripletPrime()
+		{
+			//arrange
+			int[] expected = TripletPrime.TestNumbers;
+			TripletPrime sequence = new TripletPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
 		}
@@ -108,7 +111,7 @@ namespace TestSequences
 		public void TestEmirpPrime()
 		{
 			//arrange
-			BigInteger[] expected = EmirpPrime.TestNumbers;
+			int[] expected = EmirpPrime.TestNumbers;
 			EmirpPrime sequence = new EmirpPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
@@ -124,56 +127,54 @@ namespace TestSequences
 		//	TestSequence(sequence, expected);
 		//}
 
-		[TestMethod]
-		public void TestGoodPrime()
-		{
-			//arrange
-			BigInteger[] expected = GoodPrime.TestNumbers;
-			GoodPrime sequence = new GoodPrime(expected.Last());
-			//act assert
-			TestSequence(sequence, expected);
-		}
+		//[TestMethod]
+		//public void TestGoodPrime()
+		//{
+		//	//arrange
+		//	int[] expected = GoodPrime.TestNumbers;
+		//	GoodPrime sequence = new GoodPrime(expected.Last());
+		//	//act assert
+		//	TestSequence(sequence, expected);
+		//}
 
 		[TestMethod]
 		public void TestHappy()
 		{
 			//arrange
-			BigInteger[] expected = Happy.TestNumbers;
+			int[] expected = Happy.TestNumbers;
 			Happy sequence = new Happy(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
 		}
 
 		[TestMethod]
-		public void TestHappyPrime()
+		public void TestLucky()
 		{
 			//arrange
-			BigInteger[] expected = new BigInteger[] { 7, 13, 19, 23, 31, 79, 97, 103, 109, 139, 167, 193, 239, 263, 293, 313, 331, 367, 379, 383, 397, 409, 487, 563, 617, 653, 673, 683, 709, 739, 761, 863, 881, 907, 937, 1009, 1033, 1039, 1093 };
-			Happy happy = new Happy(expected.Last());
-			Prime prime = new Prime(expected.Last());
+			int[] expected = Lucky.TestNumbers;
+			Lucky sequence = new Lucky(expected.Last());
 			//act assert
-			TestIntersection(happy, prime, expected);
+			TestSequence(sequence, expected);
 		}
 
 		[TestMethod]
 		public void TestHiggsPrime()
 		{
 			//arrange
-			BigInteger[] expected = HiggsPrime.TestNumbers;
+			int[] expected = HiggsPrime.TestNumbers;
 			HiggsPrime sequence = new HiggsPrime(expected.Last());
 			//act assert
 			TestSequence(sequence, expected);
 		}
 
-		[TestMethod]
-		public void TestHighlyCototient()
-		{
-			//arrange
-			BigInteger[] expected = HighlyCototient.TestNumbers;
-			HighlyCototient sequence = new HighlyCototient(expected.Last());
-			//act assert
-			TestSequence(sequence, expected);
-		}
+		//[TestMethod]
+		//public void TestHighlyCototient()
+		//{
+		//	//arrange
+		//	int[] expected = HighlyCototient.TestNumbers;
+		//	HighlyCototient sequence = new HighlyCototient(expected.Last());
+		//	//act assert
+		//	TestSequence(sequence, expected);
+		//}
 	}
-	*/
 }

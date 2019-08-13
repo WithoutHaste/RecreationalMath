@@ -31,8 +31,8 @@ namespace Generator
 
 			//Sequence sequence = new TwinPrime(2000000);
 			//Sequence sequence = new IsolatedPrime(2000000);
-			Sequence sequence = new SexyPrime(2000000);
-			//Sequence sequence = new TripletPrime(2000000);
+			//Sequence sequence = new SexyPrime(2000000);
+			Sequence sequence = new TripletPrime(2000000);
 			sequence.Save();
 
 			Console.WriteLine("Done");

@@ -20,15 +20,43 @@ namespace WithoutHaste.Sequences
 
 		protected override void Generate()
 		{
-			Sequence sexy = new SexyPrime(Max);
-			Sequence twin = new TwinPrime(Max);
-			Sequence cousin = new CousinPrime(Max);
+			Sequence sexy = new SexyPrime(Max + 6);
+			Sequence twin = new TwinPrime(Max + 6);
+			Sequence cousin = new CousinPrime(Max + 6);
 
-			Intersection sexyAndTwin = sexy.Intersect(twin);
-			Intersection sexyAndCousin = sexy.Intersect(cousin);
-			Union triplet = sexyAndTwin.Union(sexyAndCousin);
+			int prevPrevTerm = 0;
+			int prevTerm = 0;
+			foreach(int prime in sexy.Numbers)
+			{
+				if(prime > Max)
+					break;
+				if(sexy.Contains(prime + 6))
+				{
+					if(twin.Contains(prime + 2))
+					{
+						AddNumber(prime, prevPrevTerm, prevTerm);
+						AddNumber(prime + 2, prevPrevTerm, prevTerm);
+						AddNumber(prime + 6, prevPrevTerm, prevTerm);
+						prevPrevTerm = prime + 2;
+						prevTerm = prime + 6;
+					}
+					else if(cousin.Contains(prime + 4))
+					{
+						AddNumber(prime, prevPrevTerm, prevTerm);
+						AddNumber(prime + 4, prevPrevTerm, prevTerm);
+						AddNumber(prime + 6, prevPrevTerm, prevTerm);
+						prevPrevTerm = prime + 4;
+						prevTerm = prime + 6;
+					}
+				}
+			}
+		}
 
-			Numbers = triplet.Numbers;
+		private void AddNumber(int number, int prevPrevTerm, int prevTerm)
+		{
+			if(number == prevPrevTerm || number == prevTerm)
+				return;
+			Numbers.Add(number);
 		}
 
 		public override string GetSaveToFolder()
