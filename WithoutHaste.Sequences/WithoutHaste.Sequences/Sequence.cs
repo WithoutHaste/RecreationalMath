@@ -142,44 +142,6 @@ namespace WithoutHaste.Sequences
 		}
 
 		/// <summary>
-		/// Folder to contain all files related to this sequence.
-		/// </summary>
-		public abstract string GetSaveToFolder();
-
-		/// <summary>
-		/// Load pre-generated data from file(s).
-		/// Assumes files contain every element in the sequence in the file's range.
-		/// </summary>
-		private void Load(string loadFromFolder = null)
-		{
-			if(loadFromFolder == null)
-				loadFromFolder = GetSaveToFolder();
-			string path = Path.Combine(Settings.SaveToDirectory, loadFromFolder);
-			if(!Directory.Exists(path))
-				return;
-			string[] filenames = Directory.GetFiles(path).Where(f => Path.GetExtension(f) == Settings.IntegerFileExtension).Select(f => Path.GetFileName(f)).ToArray();
-			Array.Sort(filenames, new StartsWithNumberComparer());
-			foreach(string filename in filenames)
-			{
-				using(BinaryReader reader = new BinaryReader(File.Open(Path.Combine(path, filename), FileMode.Open)))
-				{
-					while(reader.BaseStream.Position != reader.BaseStream.Length)
-					{
-						int number = reader.ReadInt32();
-						if(number > Max)
-						{
-							loadReachedMax = true;
-							break;
-						}
-						Numbers.Add(number);
-					}
-				}
-				if(Extensions.GetEndingNumber(Path.GetFileNameWithoutExtension(filename)) >= Max)
-					loadReachedMax = true;
-			}
-		}
-
-		/// <summary>
 		/// Save sequence to file(s).
 		/// </summary>
 		/// <remarks>
@@ -245,5 +207,43 @@ namespace WithoutHaste.Sequences
 			segments.Add(nextSegment);
 			return segments;
 		}
+
+		/// <summary>
+		/// Load pre-generated data from file(s).
+		/// Assumes files contain every element in the sequence in the file's range.
+		/// </summary>
+		private void Load(string loadFromFolder = null)
+		{
+			if(loadFromFolder == null)
+				loadFromFolder = GetSaveToFolder();
+			string path = Path.Combine(Settings.SaveToDirectory, loadFromFolder);
+			if(!Directory.Exists(path))
+				return;
+			string[] filenames = Directory.GetFiles(path).Where(f => Path.GetExtension(f) == Settings.IntegerFileExtension).Select(f => Path.GetFileName(f)).ToArray();
+			Array.Sort(filenames, new StartsWithNumberComparer());
+			foreach(string filename in filenames)
+			{
+				using(BinaryReader reader = new BinaryReader(File.Open(Path.Combine(path, filename), FileMode.Open)))
+				{
+					while(reader.BaseStream.Position != reader.BaseStream.Length)
+					{
+						int number = reader.ReadInt32();
+						if(number > Max)
+						{
+							loadReachedMax = true;
+							break;
+						}
+						Numbers.Add(number);
+					}
+				}
+				if(Extensions.GetEndingNumber(Path.GetFileNameWithoutExtension(filename)) >= Max)
+					loadReachedMax = true;
+			}
+		}
+
+		/// <summary>
+		/// Folder to contain all files related to this sequence.
+		/// </summary>
+		public abstract string GetSaveToFolder();
 	}
 }
