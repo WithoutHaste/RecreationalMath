@@ -54,6 +54,8 @@ namespace WithoutHaste.Sequences
 
 		private void AddNumber(int number, int prevPrevTerm, int prevTerm)
 		{
+			if(number > Max)
+				return;
 			if(number == prevPrevTerm || number == prevTerm)
 				return;
 			Numbers.Add(number);

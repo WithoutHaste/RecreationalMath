@@ -105,6 +105,16 @@ namespace TestSequences
 			TestSequence(sequence, expected);
 		}
 
+		[TestMethod]
+		public void TestQuadrupletPrime()
+		{
+			//arrange
+			int[] expected = QuadrupletPrime.TestNumbers;
+			QuadrupletPrime sequence = new QuadrupletPrime(expected.Last());
+			//act assert
+			TestSequence(sequence, expected);
+		}
+
 		#endregion
 
 		[TestMethod]
