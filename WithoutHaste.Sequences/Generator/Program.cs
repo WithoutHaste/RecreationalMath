@@ -13,7 +13,7 @@ namespace Generator
 			var max = 10000;
 
 			Sequence sequence = new SieveOfEratosthenes(max);
-			sequence.Save();
+			sequence.LittleSave();
 
 			//Sequence sequence = new Happy(200000);
 			//Sequence sequence = new AdditivePrime(200000);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace WithoutHaste.Sequences
 {
@@ -16,7 +17,7 @@ namespace WithoutHaste.Sequences
 		/// Must be less than Int32.MaxValue so that index does not overflow on iteration.
 		/// Must also be low enough to not immediately run out of memory.
 		/// </remarks>
-		private static readonly int SIEVE_LENGTH = 100000000;
+		private static readonly int MAX_SIEVE_LENGTH = 100000000;
 
 		private List<bool[]> sieves;
 		private int trueIndex;
@@ -36,6 +37,8 @@ namespace WithoutHaste.Sequences
 		/// <inheritdoc/>
 		protected override void Generate()
 		{
+			var SIEVE_LENGTH = Math.Min(Max, MAX_SIEVE_LENGTH);
+
 			int sieveCount = (int)(Max / SIEVE_LENGTH) + 1;
 			sieves = new List<bool[]>();
 			for(int i = 0; i < sieveCount; i++)

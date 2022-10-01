@@ -55,9 +55,9 @@ namespace WithoutHaste.Sequences
 			Numbers = new List<int>();
 			Max = max;
 			Initialize();
-			Load();
-			if(loadReachedMax)
-				return;
+			//Load();
+			//if(loadReachedMax)
+			//	return;
 			Generate();
 		}
 
@@ -151,18 +151,41 @@ namespace WithoutHaste.Sequences
 			Save();
 		}
 
-		/// <summary>
-		/// Save sequence to file(s).
-		/// </summary>
-		/// <remarks>
-		/// Files are saved in binary format to save space.
-		/// It is one Int32 after another, with nothing between them.
-		/// Therefore, the largest sequence element that can be saved is Int32.MaxValue.
-		/// </remarks>
-		/// <remarks>
-		/// Does not remove old files.
-		/// </remarks>
-		public void Save()
+		public void LittleSave()
+		{
+            string path = Path.Combine(Settings.SaveToDirectory, GetSaveToFolder());
+            Directory.CreateDirectory(path);
+
+            string textFilename = String.Format("{0}to{1}.txt", 1, Max);
+			Console.WriteLine(path);
+            using (StreamWriter writer = new StreamWriter(Path.Combine(path, textFilename), append: false))
+            {
+                var count = 0;
+                foreach (int number in Numbers)
+                {
+                    writer.Write(number + ", ");
+                    if (count >= 20)
+                    {
+                        writer.Write("\n");
+                        count = 0;
+                    }
+                    count++;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Save sequence to file(s).
+        /// </summary>
+        /// <remarks>
+        /// Files are saved in binary format to save space.
+        /// It is one Int32 after another, with nothing between them.
+        /// Therefore, the largest sequence element that can be saved is Int32.MaxValue.
+        /// </remarks>
+        /// <remarks>
+        /// Does not remove old files.
+        /// </remarks>
+        public void Save()
 		{
 			string path = Path.Combine(Settings.SaveToDirectory, GetSaveToFolder());
 			Directory.CreateDirectory(path);
@@ -187,9 +210,16 @@ namespace WithoutHaste.Sequences
 				string textFilename = String.Format("{0}to{1}.txt", min, rangeMax);
 				using(StreamWriter writer = new StreamWriter(Path.Combine(path, textFilename)))
 				{
+					var count = 0;
 					foreach(int number in segment)
 					{
 						writer.Write(number + ", ");
+						if (count >= 20)
+						{
+							writer.Write("\n");
+							count = 0;
+						}
+						count++;
 					}
 				}
 				min += range;
