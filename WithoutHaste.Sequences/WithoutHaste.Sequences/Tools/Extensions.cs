@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -71,15 +72,30 @@ namespace WithoutHaste.Sequences.Tools
 			return sum;
 		}
 
-		/// <summary>
-		/// Primorial is similar to Factorial. Symbol: n# instead of n!
-		/// There are two conflicting definitions. The one used here is:
-		///   n# = the product of all primes less than or equal to n
+        /// <summary>
+        /// Returns all divisors of N
+        /// For example, 12 returns 1, 2, 3, 4, 6, 12
 		/// </summary>
-		/// <remarks>
-		/// Assumes <paramref name='primes'/> contains all the necessary primes.
-		/// </remarks>
-		internal static int Primorial(this int n, int[] primes)
+		internal static List<int> Divisors(int n)
+        {
+			var divisors = new List<int>();
+            for (int i = 1; i <= n; i++)
+            {
+                if (n % i == 0)
+                    divisors.Add(i);
+            }
+            return divisors;
+        }
+
+        /// <summary>
+        /// Primorial is similar to Factorial. Symbol: n# instead of n!
+        /// There are two conflicting definitions. The one used here is:
+        ///   n# = the product of all primes less than or equal to n
+        /// </summary>
+        /// <remarks>
+        /// Assumes <paramref name='primes'/> contains all the necessary primes.
+        /// </remarks>
+        internal static int Primorial(this int n, int[] primes)
 		{
 			int primorial = 1;
 			for(int i = primes.Length - 1; i >= 0; i--)
