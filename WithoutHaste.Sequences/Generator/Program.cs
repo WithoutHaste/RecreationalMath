@@ -10,8 +10,10 @@ namespace Generator
 			//Sequence sequence = new SieveOfEratosthenes(Int32.MaxValue); //out of memory exception adding 15th sieve
 			//Sequence sequence = new SieveOfEratosthenes(Int32.MaxValue / 2); //ran out of memory getting approx. 33 millionth prime from the sieve
 
-			//Sequence sequence2 = new SieveOfEratosthenes(2000000);
-			//sequence2.Save();
+			var max = 10000;
+
+			Sequence sequence = new SieveOfEratosthenes(max);
+			sequence.Save();
 
 			//Sequence sequence = new Happy(200000);
 			//Sequence sequence = new AdditivePrime(200000);
@@ -33,8 +35,8 @@ namespace Generator
 			//Sequence sequence = new IsolatedPrime(2000000);
 			//Sequence sequence = new SexyPrime(2000000);
 			//Sequence sequence = new TripletPrime(2000000);
-			Sequence sequence = new QuadrupletPrime(2000000);
-			sequence.Save();
+			//Sequence sequence = new QuadrupletPrime(2000000);
+			//sequence.Save();
 
 			Console.WriteLine("Done");
 			Console.ReadLine();

@@ -189,7 +189,7 @@ namespace WithoutHaste.Sequences
 				{
 					foreach(int number in segment)
 					{
-						writer.WriteLine(number);
+						writer.Write(number + ", ");
 					}
 				}
 				min += range;
