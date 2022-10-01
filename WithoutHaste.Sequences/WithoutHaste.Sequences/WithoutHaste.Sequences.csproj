@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditivePrime.cs" />
+    <Compile Include="Composite.cs" />
     <Compile Include="Difference.cs" />
     <Compile Include="Fortunate.cs" />
     <Compile Include="Happy.cs" />
