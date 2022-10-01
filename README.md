@@ -2,7 +2,8 @@
 
 Integer sequence generators and pre-generated values.
 
-[List of Prime Numbers from 1 to 10000](ListsOfNumbers/Prime_1_10000.txt)
+[List of Prime Numbers from 1 to 10000](ListsOfNumbers/Prime_1_10000.txt)  
+[List of Happy Numbers from 1 to 10000](ListsOfNumbers/Happy_1_10000.txt)
 
 ## WithoutHaste.Sequences
 
