@@ -13,14 +13,14 @@ namespace Generator
 			//Sequence sequence = new SieveOfEratosthenes(2000000);
 
 			//Sequence sequence = new Happy(10000);
-			//Sequence sequence = new AdditivePrime(200000);
+			Sequence sequence = new AdditivePrime(10000);
 			//Sequence sequence = new CircularPrime(200000);
 			//Sequence sequence = new CousinPrime(200000);
 			//Sequence sequence = new EmirpPrime(200000);
 			//Sequence sequence = new HiggsPrime(200000);
 			//PrimeFactors primeFactors = new PrimeFactors(200000);
 
-			Sequence sequence = new Lucky(10000);
+			//Sequence sequence = new Lucky(10000);
 			//Sequence sequence2 = new SieveOfEratosthenes(300000);
 			//Sequence intersection = sequence.Intersect(sequence2);
 			//intersection.Save();
