@@ -38,7 +38,8 @@ namespace Generator
             //Sequence sequence = new Abundant(10000);
             //Sequence sequence = new Deficient(10000);
             //Sequence sequence = new Perfect(10000);
-            Sequence sequence = new Tau(10000);
+            //Sequence sequence = new Tau(10000);
+            Sequence sequence = new SophieGermainPrime(10000);
             sequence.Save();
 
 			Console.WriteLine("Done");
