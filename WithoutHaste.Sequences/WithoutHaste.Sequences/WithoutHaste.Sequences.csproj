@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abundant.cs" />
     <Compile Include="AdditivePrime.cs" />
     <Compile Include="Composite.cs" />
     <Compile Include="Difference.cs" />

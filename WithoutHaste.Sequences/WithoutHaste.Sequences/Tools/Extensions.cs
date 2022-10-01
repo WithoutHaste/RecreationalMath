@@ -56,6 +56,21 @@ namespace WithoutHaste.Sequences.Tools
 			return sum;
 		}
 
+        /// <summary>
+        /// Sum of Proper Divisors: aka Aliquot Sum: SPD(N)
+        /// For example, SPD(12) = 1 + 2 + 3 + 4 + 6 = 16 
+		/// </summary>
+		internal static int SumOfProperDivisors(int n)
+		{
+			int sum = 0;
+			for (int i = 1; i < n; i++) 
+			{
+				if (n % i == 0)
+					sum += i;
+			}
+			return sum;
+		}
+
 		/// <summary>
 		/// Primorial is similar to Factorial. Symbol: n# instead of n!
 		/// There are two conflicting definitions. The one used here is:

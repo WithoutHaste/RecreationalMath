@@ -34,7 +34,8 @@ namespace Generator
             //Sequence sequence = new TripletPrime(2000000);
             //Sequence sequence = new QuadrupletPrime(2000000);
 
-            Sequence sequence = new Composite(10000);
+            //Sequence sequence = new Composite(10000);
+            Sequence sequence = new Abundant(10000);
             sequence.Save();
 
 			Console.WriteLine("Done");
