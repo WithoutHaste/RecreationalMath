@@ -10,6 +10,7 @@ Integer sequence generators and pre-generated values.
 [List of Lucky Numbers from 1 to 10000](ListsOfNumbers/Lucky_1_10000.txt)  
 [List of Abundant Numbers from 1 to 10000](ListsOfNumbers/Abundant_1_10000.txt)  
 [List of Deficient Numbers from 1 to 10000](ListsOfNumbers/Deficient_1_10000.txt)  
+[List of Perfect Numbers from 1 to 10000](ListsOfNumbers/Perfect_1_10000.txt)  
 
 ## WithoutHaste.Sequences
 

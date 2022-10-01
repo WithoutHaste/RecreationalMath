@@ -60,6 +60,7 @@
     <Compile Include="EmirpPrime.cs" />
     <Compile Include="Intersection.cs" />
     <Compile Include="Lucky.cs" />
+    <Compile Include="Perfect.cs" />
     <Compile Include="Tools\Extensions.cs" />
     <Compile Include="GaussianPrime.cs" />
     <Compile Include="GoodPrime.cs" />
