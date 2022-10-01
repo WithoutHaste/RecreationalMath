@@ -46,6 +46,7 @@
     <Compile Include="Abundant.cs" />
     <Compile Include="AdditivePrime.cs" />
     <Compile Include="Composite.cs" />
+    <Compile Include="Deficient.cs" />
     <Compile Include="Difference.cs" />
     <Compile Include="Fortunate.cs" />
     <Compile Include="Happy.cs" />
