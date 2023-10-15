@@ -15,6 +15,10 @@ Integer sequence generators and pre-generated values.
 [List of Perfect Numbers from 1 to 10000](ListsOfNumbers/Perfect_1_10000.txt)  
 [List of Tau Numbers from 1 to 10000](ListsOfNumbers/Tau_1_10000.txt)  
 
+## Javascript
+
+JS library files in `javascript` folder.
+
 ## WithoutHaste.Sequences
 
 Targeting .Net 4.0 to use the System.Numerics.BigInteger data type.
