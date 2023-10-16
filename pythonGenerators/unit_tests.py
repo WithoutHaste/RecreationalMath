@@ -1,5 +1,6 @@
 import unittest
 from generate_divisors import generate_divisors
+from generate_happy import generate_happy
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes
 
 class unit_tests(unittest.TestCase):
@@ -47,11 +48,20 @@ class unit_tests(unittest.TestCase):
 			19: [1, 19],
 			20: [1, 2, 4, 5, 10, 20],		
 		}
-		divisors = generate_divisors(1000)
+		divisors = generate_divisors(30)
 		for key in known_divisors:
 			self.assertEqual(len(known_divisors[key]), len(divisors[key]))
 			for val in known_divisors[key]:
 				self.assertTrue(val in divisors[key])
+
+	def test_happy(self):
+		known_unhappy = [4, 16, 37, 58, 89, 145, 42, 20]
+		known_happy = [1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49, 68, 70, 79, 82, 86, 91, 94, 97, 100, 103, 109, 129, 130]
+		happy = generate_happy(1000)
+		for i in known_unhappy:
+			self.assertFalse(i in happy)
+		for i in known_happy:
+			self.assertTrue(i in happy)
 
 if __name__ == "__main__":
     unittest.main()
