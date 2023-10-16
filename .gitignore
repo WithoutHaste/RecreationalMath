@@ -1,3 +1,5 @@
+*.pyc
+
 WithoutHaste.Sequences/.vs
 WithoutHaste.Sequences/WithoutHaste.Sequences/bin/Debug/*
 WithoutHaste.Sequences/WithoutHaste.Sequences/obj/*

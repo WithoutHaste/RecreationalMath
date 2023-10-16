@@ -63,8 +63,7 @@ QUnit.test("getNextPrime: known values", function( assert ) {
     assert.equal(getNextPrime(2), 3, "prime -> next prime" );
     assert.equal(getNextPrime(14), 17, "composite -> next prime" );
     assert.equal(getNextPrime(995), 997, "works for primes below 1000" );
-    assert.equal(getNextPrime(997), -1, "too big -> error value" );
-    assert.equal(getNextPrime(10000), -1, "too big -> error value" );
+    assert.equal(getNextPrime(100000), -1, "too big -> error value" );
 });
 
 /////////////////////////////////////////////////////////////////////////
@@ -85,7 +84,7 @@ QUnit.test("areCoprime: false", function( assert ) {
     assert.notOk(areCoprime([12,144]), "composite and its multiple" );
     assert.notOk(areCoprime([12,121,479,497,209]), "five values, only one pair isn't coprime" );
     assert.notOk(areCoprime([12,121,144,498,209]), "five values, many aren't coprime" );
-    assert.notOk(areCoprime([1001]), "value out of range" );
+    assert.notOk(areCoprime([10001]), "value out of range" );
 });
 
 /////////////////////////////////////////////////////////////////////////
