@@ -1,11 +1,1 @@
 *.pyc
-
-WithoutHaste.Sequences/.vs
-WithoutHaste.Sequences/WithoutHaste.Sequences/bin/Debug/*
-WithoutHaste.Sequences/WithoutHaste.Sequences/obj/*
-
-WithoutHaste.Sequences/TestSequences/bin/*
-WithoutHaste.Sequences/TestSequences/obj/*
-
-WithoutHaste.Sequences/Generator/bin/*
-WithoutHaste.Sequences/Generator/obj/*
