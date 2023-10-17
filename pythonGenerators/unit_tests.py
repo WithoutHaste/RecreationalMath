@@ -2,6 +2,7 @@ import unittest
 from generate_divisors import generate_divisors
 from generate_happy import generate_happy
 from generate_lucky import generate_lucky, apply_next_lucky
+from generate_perfect_powers import generate_perfect_powers
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
 
 class unit_tests(unittest.TestCase):
@@ -88,6 +89,12 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in lucky)
 		for i in known_lucky:
 			self.assertTrue(i in lucky)
+
+	def test_perfect_powers(self):
+		known_perfect_powers = [1, 4, 8, 9, 16, 25, 27, 32, 36, 49, 64, 81, 100, 121, 125, 128, 144, 169, 196, 216, 225, 243, 256, 289, 324, 343, 361]
+		perfect_powers = generate_perfect_powers(370)
+		for i in range(len(known_perfect_powers)):
+			self.assertEqual(known_perfect_powers[i], perfect_powers[i])
 	
 if __name__ == "__main__":
     unittest.main()
