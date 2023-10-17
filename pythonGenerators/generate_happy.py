@@ -53,9 +53,13 @@ def apply_path(is_happy, path, val):
 	for i in path:
 		is_happy[i] = val
 
-happy_1000 = generate_happy(1000)
-save_as_text_list(happy_1000, 'happy_1_1000')
+def main():
+	happy_1000 = generate_happy(1000)
+	save_as_text_list(happy_1000, 'happy_1_1000')
 
-happy_10000 = generate_happy(10000)
-save_as_text_list(happy_10000, 'happy_1_10000')
-save_as_javascript_list(happy_10000, 'integers_happy', 'INTS_HAPPY', ['happy numbers 1-10000'], 'w')
+	happy_10000 = generate_happy(10000)
+	save_as_text_list(happy_10000, 'happy_1_10000')
+	save_as_javascript_list(happy_10000, 'integers_happy', 'INTS_HAPPY', ['happy numbers 1-10000'], 'w')
+
+if __name__ == "__main__":
+    main()

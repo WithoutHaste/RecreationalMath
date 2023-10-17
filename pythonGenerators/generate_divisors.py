@@ -18,15 +18,19 @@ def generate_divisors(max):
 			result[n].append(divisor)
 	return result	
 	
-divisors_1000 = generate_divisors(1000)
-save_as_text_dict(divisors_1000, 'divisors_1_1000')
+def main():
+	divisors_1000 = generate_divisors(1000)
+	save_as_text_dict(divisors_1000, 'divisors_1_1000')
 
-js_comments = [
-	'INTS_DIVISORS[n] = array of proper divisors',
-	'for integers 1-1000',
-	'proper divisor: the number itself is included, and the values are distinct'
-]
-save_as_javascript_dict(divisors_1000, 'integers_divisors', 'INTS_DIVISORS', js_comments, 'w')
+	js_comments = [
+		'INTS_DIVISORS[n] = array of proper divisors',
+		'for integers 1-1000',
+		'proper divisor: the number itself is included, and the values are distinct'
+	]
+	save_as_javascript_dict(divisors_1000, 'integers_divisors', 'INTS_DIVISORS', js_comments, 'w')
 
-divisors_10000 = generate_divisors(10000)
-save_as_text_dict(divisors_10000, 'divisors_1_10000')
+	divisors_10000 = generate_divisors(10000)
+	save_as_text_dict(divisors_10000, 'divisors_1_10000')
+
+if __name__ == "__main__":
+    main()

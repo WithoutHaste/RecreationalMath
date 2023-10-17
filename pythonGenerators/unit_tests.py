@@ -1,6 +1,7 @@
 import unittest
 from generate_divisors import generate_divisors
 from generate_happy import generate_happy
+from generate_lucky import generate_lucky, apply_next_lucky
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes
 
 class unit_tests(unittest.TestCase):
@@ -57,12 +58,31 @@ class unit_tests(unittest.TestCase):
 	def test_happy(self):
 		known_unhappy = [4, 16, 37, 58, 89, 145, 42, 20]
 		known_happy = [1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49, 68, 70, 79, 82, 86, 91, 94, 97, 100, 103, 109, 129, 130]
-		happy = generate_happy(1000)
+		happy = generate_happy(200)
 		for i in known_unhappy:
 			self.assertFalse(i in happy)
 		for i in known_happy:
 			self.assertTrue(i in happy)
+			
+	def test_apply_next_lucky(self):
+		# init lucky as 1, 3, 5, 7, 9, 11
+		is_lucky = [False, True, False, True, False, True, False, True, False, True, False, True]
+		next_lucky = 3
+		apply_next_lucky(is_lucky, next_lucky)
+		self.assertTrue(is_lucky[3])
+		self.assertFalse(is_lucky[5])
+		self.assertTrue(is_lucky[7])
+		self.assertFalse(is_lucky[11])
 
+	def test_lucky(self):
+		known_unlucky = [0, 2, 4, 5, 6, 8, 10, 11, 12, 14, 16, 17, 18, 19, 20, 22, 23, 24]
+		known_lucky = [1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63, 67, 69, 73, 75, 79, 87, 93, 99, 105]
+		lucky = generate_lucky(200)
+		for i in known_unlucky:
+			self.assertFalse(i in lucky)
+		for i in known_lucky:
+			self.assertTrue(i in lucky)
+	
 if __name__ == "__main__":
     unittest.main()
 		
