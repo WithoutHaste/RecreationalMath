@@ -20,11 +20,11 @@ class unit_tests(unittest.TestCase):
 			self.assertEqual(known_emirps[i], emirps[i])
 
 	def test_prime_twin(self):
-		known_twins = [3, 5, 7, 11, 13, 17, 19, 29, 31, 41, 43, 59, 61, 71, 73, 101, 103, 107, 109]
-		twins = generate_twin_primes(1000)
-		self.assertEqual(1, twins.count(5)) # don't list duplicates twice (5 twins both 3 and 7)
+		known_twins = [[3, 5], [5, 7], [11, 13], [17, 19], [29, 31], [41, 43], [59, 61], [71, 73], [101, 103], [107, 109]]
+		twins = generate_twin_primes(200)
 		for i in range(len(known_twins)):
-			self.assertEqual(known_twins[i], twins[i])
+			self.assertEqual(known_twins[i][0], twins[i][0])
+			self.assertEqual(known_twins[i][1], twins[i][1])
 
 	def test_divisors(self):
 		known_divisors = {
