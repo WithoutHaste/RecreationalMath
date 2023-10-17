@@ -2,7 +2,7 @@ import unittest
 from generate_divisors import generate_divisors
 from generate_happy import generate_happy
 from generate_lucky import generate_lucky, apply_next_lucky
-from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes
+from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
 
 class unit_tests(unittest.TestCase):
 	def test_prime(self):
@@ -25,6 +25,12 @@ class unit_tests(unittest.TestCase):
 		for i in range(len(known_twins)):
 			self.assertEqual(known_twins[i][0], twins[i][0])
 			self.assertEqual(known_twins[i][1], twins[i][1])
+
+	def test_prime_balanced(self):
+		known_balanced = [5, 53, 157, 173, 211, 257, 263, 373, 563, 593]
+		balanced = generate_balanced_primes(600)
+		for i in range(len(known_balanced)):
+			self.assertEqual(known_balanced[i], balanced[i])
 
 	def test_divisors(self):
 		known_divisors = {
