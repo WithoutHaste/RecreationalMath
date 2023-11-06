@@ -12,7 +12,14 @@ def generate_practical(max):
 		sums_to_n.append([])
 	is_practical = [1]
 	for n in range(max+1):
+		print("n = " + str(n))
 		if n <= 1 or n in is_practical:
+			continue
+		# odd numbers (other than 1) are not practical
+		if n%2 == 1:
+			continue
+		# higher practical numbers are all divisible by 4 or 6
+		if n > 6 and not (n%4 == 0 or n%6 == 0):
 			continue
 		n_is_practical = True
 		next_permutation = [0] * len(divisors[n]) # index corresponds to i-th divisor, value 1 means include it in the sum
@@ -28,7 +35,7 @@ def generate_practical(max):
 			while 0 in next_permutation:
 				permutation = increment_and_return_permutation(next_permutation, divisors[n])
 				total = sum(permutation)
-				if total <= max:
+				if total <= max and not contains_set(permutation, sums_to_n[total]):
 					sums_to_n[total].append(permutation)
 				if total == m:
 					permutation_loop_succeeded = True
