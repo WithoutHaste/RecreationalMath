@@ -3,7 +3,7 @@ from generate_divisors import generate_divisors
 from generate_happy import generate_happy
 from generate_lucky import generate_lucky, apply_next_lucky
 from generate_perfect_powers import generate_perfect_powers
-from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical
+from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
 
 class unit_tests(unittest.TestCase):
@@ -73,7 +73,7 @@ class unit_tests(unittest.TestCase):
 			self.assertTrue(i in happy)
 			
 	def test_apply_next_lucky(self):
-		# init lucky as 1, 3, 5, 7, 9, 11
+		# lucky as 1, 3, 5, 7, 9, 11
 		is_lucky = [False, True, False, True, False, True, False, True, False, True, False, True]
 		next_lucky = 3
 		apply_next_lucky(is_lucky, next_lucky)
@@ -97,6 +97,27 @@ class unit_tests(unittest.TestCase):
 		for i in range(len(known_perfect_powers)):
 			self.assertEqual(known_perfect_powers[i], perfect_powers[i])
 			
+	def assert_list_of_list_of_list_matches(self, a, b):
+		for n in range(len(a)):
+			self.assertEqual(len(a[n]), len(b[n]))
+			for set_b in b[n]:
+				self.assertTrue(contains_set(set_b, a[n]))
+				
+	def assert_list_of_list_matches(self, a, b):
+		""" input format: [ [1], [1,2,3], [4,5] ] """
+		self.assertEqual(len(a), len(b))
+		a.sort()
+		b.sort()
+		for a_prime in a:
+			a_prime.sort()
+			found_match = False
+			for b_prime in b:
+				b_prime.sort()
+				if a_prime == b_prime:
+					found_match = True
+					break
+			self.assertTrue(found_match)
+			
 	def test_sums_to_n(self):
 		known_sums = [
 			[],
@@ -106,23 +127,25 @@ class unit_tests(unittest.TestCase):
 			[[4], [1,3]],
 			[[5], [1,4], [2,3]],
 			[[6], [1,5], [2,4], [1,2,3]],
-			[[7], [1,6], [2,5], [3,4], [1,2,4]]
+			[[7], [1,6], [2,5], [3,4], [1,2,4]],
+			[[8], [1,7], [2,6], [3,5], [1,2,5], [1,3,4]]
 		]
-		sums = generate_sums_to_n(7)
-		for n in range(len(known_sums)):
-			self.assertEqual(len(known_sums[n]), len(sums[n]))
-			for set_a in sums[n]:
-				self.assertTrue(contains_set(set_a, known_sums[n]))
+		sums = generate_sums_to_n(8)
+		self.assert_list_of_list_of_list_matches(known_sums, sums)
 			
 	def test_one_of_these_is_a_subset(self):
 		self.assertFalse(one_of_these_is_a_subset([[1], [4, 7]], [2, 3, 6])) # no match at all
 		self.assertFalse(one_of_these_is_a_subset([[1], [3, 7]], [2, 3, 6])) # no full match
 		self.assertTrue(one_of_these_is_a_subset([[1], [3, 6]], [2, 3, 6])) # one full match
-			
+		
+	def test_generate_permutations(self):
+		set_a = [1, 2, 3]
+		permutations_a = [[], [1], [2], [3], [1,2], [1,3], [2,3], [1,2,3]]		self.assert_list_of_list_matches(permutations_a, generate_permutations([], set_a))
+	
 	def test_generate_practical(self):
 		known_not_practical = [0, 3, 5, 7, 9, 10, 11, 13, 14, 15]
-		known_practical = [1, 2, 4, 6, 8, 12, 16, 18, 20, 24, 28, 30]#, 32, 36, 40, 42, 48, 54, 56, 60, 64, 66, 72, 78, 80, 84, 88, 90, 96, 100, 104, 108, 112, 120, 126, 128, 132, 140, 144, 150, 156, 160]
-		practical = generate_practical(30) #(160)
+		known_practical = [1, 2, 4, 6, 8, 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42, 48, 54, 56, 60, 64, 66, 72, 78, 80, 84, 88, 90, 96, 100, 104, 108, 112, 120, 126, 128, 132, 140, 144, 150, 156, 160]
+		practical = generate_practical(160)
 		print(practical)
 		for i in known_not_practical:
 			self.assertFalse(i in practical)
