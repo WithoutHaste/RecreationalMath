@@ -7,9 +7,6 @@ def generate_practical(max):
 		raise Exception('generate_practical requires a positive integer')
 	
 	divisors = generate_divisors(max)
-	sums_to_n = []
-	for n in range(max+1):
-		sums_to_n.append([])
 	is_practical = [1]
 	for n in range(max+1):
 		print("n = " + str(n))
@@ -21,68 +18,49 @@ def generate_practical(max):
 		# higher practical numbers are all divisible by 4 or 6
 		if n > 6 and not (n%4 == 0 or n%6 == 0):
 			continue
-		n_is_practical = True
-		next_permutation = [0] * len(divisors[n]) # index corresponds to i-th divisor, value 1 means include it in the sum
 		# verify all lower numbers can be written as a sum of your divisors
-		for m in range(n):
-			if m <= 1:
-				continue
-			# already know how to use n's divisors to sum to m	
-			if one_of_these_is_a_subset(sums_to_n[m], divisors[n]):
-				continue
-			# check the permutations of divisors for new sums
-			permutation_loop_succeeded = False
-			while 0 in next_permutation:
-				permutation = increment_and_return_permutation(next_permutation, divisors[n])
-				total = sum(permutation)
-				if total <= max and not contains_set(permutation, sums_to_n[total]):
-					sums_to_n[total].append(permutation)
-				if total == m:
-					permutation_loop_succeeded = True
-					break
-			if permutation_loop_succeeded:
-				continue
-			n_is_practical = False
-			break # one failure is enough to exit the loop
-		# record the result
-		if n_is_practical:
-			is_practical.append(n)
-			# the product of two practical numbers is also practical, so can get some easy answers from that
-			for previous_n in is_practical:
-				multiple = n * previous_n
-				if multiple <= max and multiple not in is_practical:
-					is_practical.append(multiple)
-
-	is_practical.sort()
-	return is_practical
-			
-def generate_practical_slow(max):
-	""" Returns an array of practical numbers from 1 to max """
-	if max <= 0:
-		raise Exception('generate_practical requires a positive integer')
-	
-	sums_to_n = generate_sums_to_n(max)
-	divisors = generate_divisors(max)
-	is_practical = [1]
-	for n in range(max+1):
-		if n <= 1 or n in is_practical:
+		if not n_is_practical_by_permutations(n, divisors[n]):
 			continue
-		n_is_practical = True
-		for m in range(n): #check all smaller numbers
-			if m <= 1:
-				continue
-			if not one_of_these_is_a_subset(sums_to_n[m], divisors[n]):
-				n_is_practical = False
-		if n_is_practical:
-			is_practical.append(n)
-			# the product of two practical numbers is also practical, so can get some easy answers from that
-			for previous_n in is_practical:
-				multiple = n * previous_n
-				if multiple <= max and multiple not in is_practical:
-					is_practical.append(multiple)					
+		# record the result
+		is_practical.append(n)
+		# the product of two practical numbers is also practical, so can get some easy answers from that
+		for previous_n in is_practical:
+			multiple = n * previous_n
+			if multiple <= max and multiple not in is_practical:
+				is_practical.append(multiple)
 
 	is_practical.sort()
 	return is_practical
+	
+def n_is_practical_by_permutations(n, divisors):
+	""" Brute force check if n is practical - can all lower positive ints be written as the sum of distict divisors? """
+	for m in range(n)[2:]: #numbers 2 to n-1
+		divisors_up_to_m = [d for d in divisors if d <= m]
+		next_permutation = [0] * len(divisors_up_to_m) # index corresponds to i-th divisor, value 1 means include it in the sum
+		success = False
+		while 0 in next_permutation:
+			permutation = increment_and_return_permutation(next_permutation, divisors_up_to_m)
+			total = sum(permutation)
+			if total == m:
+				success = True
+				break
+		if not success:
+			return False
+	return True
+		
+	"""
+	lower_ints = [False] * n
+	lower_ints[0] = True
+	next_permutation = [0] * len(divisors) # index corresponds to i-th divisor, value 1 means include it in the sum
+	while 0 in next_permutation:
+		permutation = increment_and_return_permutation(next_permutation, divisors)
+		total = sum(permutation)
+		if total < n:
+			lower_ints[total] = True
+			if False not in lower_ints:
+				return True
+	return False
+	"""
 
 def increment_and_return_permutation(next_permutation, divisors):
 	""" Increments next_permutation """
