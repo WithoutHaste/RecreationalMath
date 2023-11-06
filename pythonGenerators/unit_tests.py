@@ -183,8 +183,6 @@ class unit_tests(unittest.TestCase):
 		for i in known_not_practical:
 			self.assertFalse(i in practical)
 		for i in known_practical:
-			if i not in practical:
-				print(str(i) + " not in practical list!")
 			self.assertTrue(i in practical)
 
 	
