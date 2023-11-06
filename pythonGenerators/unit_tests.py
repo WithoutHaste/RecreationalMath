@@ -3,7 +3,7 @@ from generate_divisors import generate_divisors
 from generate_happy import generate_happy
 from generate_lucky import generate_lucky, apply_next_lucky
 from generate_perfect_powers import generate_perfect_powers
-from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations, increment_and_return_permutation
+from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations, increment_and_return_permutation, n_is_practical_by_permutations
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
 
 class unit_tests(unittest.TestCase):
@@ -159,6 +159,22 @@ class unit_tests(unittest.TestCase):
 		result = increment_and_return_permutation(permutation, divisors)
 		self.assertEqual([1, 1, 0, 0, 0], permutation)
 		self.assertEqual([1, 2], result)
+		
+	def test_n_is_practical_by_permutations(self):
+		# basic cases
+		self.assertTrue(n_is_practical_by_permutations(6, [1,2,3,6]))
+		self.assertFalse(n_is_practical_by_permutations(7, [1,7]))
+		self.assertTrue(n_is_practical_by_permutations(8, [1,2,4,8]))
+		self.assertFalse(n_is_practical_by_permutations(9, [1,9]))
+		self.assertFalse(n_is_practical_by_permutations(10, [1,2,5,10]))
+		self.assertFalse(n_is_practical_by_permutations(11, [1,11]))
+		self.assertTrue(n_is_practical_by_permutations(12, [1,2,3,4,6,12]))
+		#sum of lower divisors adds up to a divisor
+		self.assertTrue(n_is_practical_by_permutations(78, [1,2,3,6,13,26,39,78]))
+		# do not add d again to a value just set to True based on d
+		self.assertFalse(n_is_practical_by_permutations(102, [1,2,3,6,17,34,51,102]))
+		#sum of lower divisors 1+2+4+6=13 is greater than next d=12
+		self.assertTrue(n_is_practical_by_permutations(348, [1,2,3,4,6,12,29,58,87,116,174,348]))
 	
 	def test_generate_practical(self):
 		known_not_practical = [0, 3, 5, 7, 9, 10, 11, 13, 14, 15]
