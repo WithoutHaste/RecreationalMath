@@ -3,7 +3,7 @@ from generate_divisors import generate_divisors
 from generate_happy import generate_happy
 from generate_lucky import generate_lucky, apply_next_lucky
 from generate_perfect_powers import generate_perfect_powers
-from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations
+from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations, increment_and_return_permutation
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
 
 class unit_tests(unittest.TestCase):
@@ -141,12 +141,29 @@ class unit_tests(unittest.TestCase):
 	def test_generate_permutations(self):
 		set_a = [1, 2, 3]
 		permutations_a = [[], [1], [2], [3], [1,2], [1,3], [2,3], [1,2,3]]		self.assert_list_of_list_matches(permutations_a, generate_permutations([], set_a))
+		
+	def test_increment_and_return_permutation(self):
+		# initial state
+		divisors = [1, 2, 4, 5, 7]
+		permutation = [0, 0, 0, 0, 0]
+		result = increment_and_return_permutation(permutation, divisors)
+		self.assertEqual([0, 0, 0, 0, 1], permutation)
+		self.assertEqual([7], result)
+		# middle state
+		permutation = [0, 0, 1, 1, 0]
+		result = increment_and_return_permutation(permutation, divisors)
+		self.assertEqual([0, 0, 1, 1, 1], permutation)
+		self.assertEqual([4, 5, 7], result)
+		# flip several 1's to 0's
+		permutation = [1, 0, 1, 1, 1]
+		result = increment_and_return_permutation(permutation, divisors)
+		self.assertEqual([1, 1, 0, 0, 0], permutation)
+		self.assertEqual([1, 2], result)
 	
 	def test_generate_practical(self):
 		known_not_practical = [0, 3, 5, 7, 9, 10, 11, 13, 14, 15]
 		known_practical = [1, 2, 4, 6, 8, 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42, 48, 54, 56, 60, 64, 66, 72, 78, 80, 84, 88, 90, 96, 100, 104, 108, 112, 120, 126, 128, 132, 140, 144, 150, 156, 160]
 		practical = generate_practical(160)
-		print(practical)
 		for i in known_not_practical:
 			self.assertFalse(i in practical)
 		for i in known_practical:

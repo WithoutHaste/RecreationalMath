@@ -15,19 +15,25 @@ def generate_practical(max):
 		if n <= 1 or n in is_practical:
 			continue
 		n_is_practical = True
-		# determine what numbers these divisors can sum to
-		n_permutations_divisors = generate_permutations([], divisors[n])
-		for permutation_divisors in n_permutations_divisors:
-			total = sum(permutation_divisors)
-			if total == 0 or total > max:
-				continue
-			sums_to_n[total].append(permutation_divisors)
+		next_permutation = [0] * len(divisors[n]) # index corresponds to i-th divisor, value 1 means include it in the sum
 		# verify all lower numbers can be written as a sum of your divisors
 		for m in range(n):
 			if m <= 1:
 				continue
 			# already know how to use n's divisors to sum to m	
 			if one_of_these_is_a_subset(sums_to_n[m], divisors[n]):
+				continue
+			# check the permutations of divisors for new sums
+			permutation_loop_succeeded = False
+			while 0 in next_permutation:
+				permutation = increment_and_return_permutation(next_permutation, divisors[n])
+				total = sum(permutation)
+				if total <= max:
+					sums_to_n[total].append(permutation)
+				if total == m:
+					permutation_loop_succeeded = True
+					break
+			if permutation_loop_succeeded:
 				continue
 			n_is_practical = False
 			break # one failure is enough to exit the loop
@@ -70,6 +76,26 @@ def generate_practical_slow(max):
 
 	is_practical.sort()
 	return is_practical
+
+def increment_and_return_permutation(next_permutation, divisors):
+	""" Increments next_permutation """
+	""" Then returns the resulting permutation of divisors """
+	# increment permutation
+	i = len(next_permutation) - 1
+	if next_permutation[i] == 0:
+		next_permutation[i] = 1
+	else:
+		while i >= 0 and next_permutation[i] == 1:
+			next_permutation[i] = 0
+			i = i - 1
+		if i >= 0:
+			next_permutation[i] = 1
+	# get resulting permutation
+	result = []
+	for i in range(len(divisors)):
+		if next_permutation[i] == 1:
+			result.append(divisors[i])
+	return result
 	
 def generate_permutations(prefix, elements):
 	""" Given a list (treated as a set), return a list of all permutations of the elements """
