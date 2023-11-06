@@ -161,6 +161,7 @@ class unit_tests(unittest.TestCase):
 		self.assertEqual([1, 2], result)
 		
 	def test_n_is_practical_by_permutations(self):
+		# basic cases
 		self.assertTrue(n_is_practical_by_permutations(6, [1,2,3,6]))
 		self.assertFalse(n_is_practical_by_permutations(7, [1,7]))
 		self.assertTrue(n_is_practical_by_permutations(8, [1,2,4,8]))
@@ -168,6 +169,12 @@ class unit_tests(unittest.TestCase):
 		self.assertFalse(n_is_practical_by_permutations(10, [1,2,5,10]))
 		self.assertFalse(n_is_practical_by_permutations(11, [1,11]))
 		self.assertTrue(n_is_practical_by_permutations(12, [1,2,3,4,6,12]))
+		#sum of lower divisors adds up to a divisor
+		self.assertTrue(n_is_practical_by_permutations(78, [1,2,3,6,13,26,39,78]))
+		# do not add d again to a value just set to True based on d
+		self.assertFalse(n_is_practical_by_permutations(102, [1,2,3,6,17,34,51,102]))
+		#sum of lower divisors 1+2+4+6=13 is greater than next d=12
+		self.assertTrue(n_is_practical_by_permutations(348, [1,2,3,4,6,12,29,58,87,116,174,348]))
 	
 	def test_generate_practical(self):
 		known_not_practical = [0, 3, 5, 7, 9, 10, 11, 13, 14, 15]
@@ -176,6 +183,8 @@ class unit_tests(unittest.TestCase):
 		for i in known_not_practical:
 			self.assertFalse(i in practical)
 		for i in known_practical:
+			if i not in practical:
+				print(str(i) + " not in practical list!")
 			self.assertTrue(i in practical)
 
 	

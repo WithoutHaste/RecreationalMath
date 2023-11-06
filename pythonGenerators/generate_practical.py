@@ -9,7 +9,6 @@ def generate_practical(max):
 	divisors = generate_divisors(max)
 	is_practical = [1]
 	for n in range(max+1):
-		print("n = " + str(n))
 		if n <= 1 or n in is_practical:
 			continue
 		# odd numbers (other than 1) are not practical
@@ -34,33 +33,32 @@ def generate_practical(max):
 	
 def n_is_practical_by_permutations(n, divisors):
 	""" Brute force check if n is practical - can all lower positive ints be written as the sum of distict divisors? """
-	for m in range(n)[2:]: #numbers 2 to n-1
-		divisors_up_to_m = [d for d in divisors if d <= m]
-		next_permutation = [0] * len(divisors_up_to_m) # index corresponds to i-th divisor, value 1 means include it in the sum
-		success = False
-		while 0 in next_permutation:
-			permutation = increment_and_return_permutation(next_permutation, divisors_up_to_m)
-			total = sum(permutation)
-			if total == m:
-				success = True
-				break
-		if not success:
-			return False
-	return True
-		
+	""" 
+	Algorithm:
+		take each divisor of n from lowest to highest
+		the divisor by itself gives an m value, mark that m True
+		then add this divisor to each previous "True" m value and mark the result True as well
+			this works because each "True" m value indicates a set of smaller distinct divisors, and this adds one larger divisors to that set
+	This will result in all the permutations of the divisors, without needing to enumerate them
+	
+	credit to https://codereview.stackexchange.com/questions/158142/practical-number-algorithm
 	"""
-	lower_ints = [False] * n
-	lower_ints[0] = True
-	next_permutation = [0] * len(divisors) # index corresponds to i-th divisor, value 1 means include it in the sum
-	while 0 in next_permutation:
-		permutation = increment_and_return_permutation(next_permutation, divisors)
-		total = sum(permutation)
-		if total < n:
-			lower_ints[total] = True
-			if False not in lower_ints:
-				return True
-	return False
-	"""
+	m_values = [False] * n # represents integers smaller than n, can they be written as the sum of distinct divisors of n?
+	m_values[0] = True # ignore m=0
+	divisors.sort() # must be least to greatest
+	for d in divisors:
+		if d >= n:
+			continue
+		for i in reversed(range(n)): # 0 to n-1, because the sum of lower divisors could already be greater than d
+			# going backwards so that d is not summed against to a value it was just summed to
+			if i == 0:
+				continue # skip 0 since d+0 will be handled later
+			if m_values[i]:
+				sum = d + i
+				if sum < n:
+					m_values[sum] = True
+		m_values[d] = True # added last so that if the sum of lower divisors totaled d, it would allow setting 2d to True
+	return False not in m_values
 
 def increment_and_return_permutation(next_permutation, divisors):
 	""" Increments next_permutation """
