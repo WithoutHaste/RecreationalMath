@@ -7,6 +7,7 @@ from generate_lucky import generate_lucky, apply_next_lucky
 from generate_magic import generate_magic
 from generate_magnanimous import generate_magnanimous
 from generate_nude import generate_nude
+from generate_partitions import generate_partitions
 from generate_perfect_powers import generate_perfect_powers
 from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations, increment_and_return_permutation, n_is_practical_by_permutations
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
@@ -244,6 +245,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in nude)
 		for i in known_nude:
 			self.assertTrue(i in nude)
+			
+	def test_generate_partitions(self):
+		known_not_partitions = [0, 4, 6, 8, 9, 10, 12, 13, 16, 17, 18, 19, 20, 21, 23, 29, 31, 41, 43, 55, 57, 76, 78, 100, 102, 134]
+		known_partitions = [1, 2, 3, 5, 7, 11, 15, 22, 30, 42, 56, 77, 101, 135]
+		partitions = generate_partitions(135)
+		for i in known_not_partitions:
+			self.assertFalse(i in partitions)
+		for i in known_partitions:
+			self.assertTrue(i in partitions)
 
 	
 if __name__ == "__main__":
