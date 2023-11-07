@@ -6,6 +6,7 @@ from generate_hogben import generate_hogben
 from generate_lucky import generate_lucky, apply_next_lucky
 from generate_magic import generate_magic
 from generate_magnanimous import generate_magnanimous
+from generate_nude import generate_nude
 from generate_perfect_powers import generate_perfect_powers
 from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations, increment_and_return_permutation, n_is_practical_by_permutations
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
@@ -234,6 +235,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in magnanimous)
 		for i in known_magnanimous:
 			self.assertTrue(i in magnanimous)
+			
+	def test_generate_nude(self):
+		known_not_nude = [0, 10, 13, 14, 16, 17, 18, 19, 20, 21]
+		known_nude = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22, 24, 33, 36, 44, 48, 55, 66, 77, 88, 99, 111, 112, 115, 122, 124, 126, 128]
+		nude = generate_nude(128)
+		for i in known_not_nude:
+			self.assertFalse(i in nude)
+		for i in known_nude:
+			self.assertTrue(i in nude)
 
 	
 if __name__ == "__main__":
