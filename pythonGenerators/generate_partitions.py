@@ -40,6 +40,8 @@ def number_of_ways_n_can_be_partitioned(n):
 	4 = 4
 	YES!
 	how many sets of non-distinct integers (1 to N) sum to N?
+	
+	(see also Bell numbers, for a variation on this)
 	"""
 	# one_to_n=[1,2,3] and factors=[0,2,1] means 1*0 + 2*2 + 3*1
 	one_to_n = [x+1 for x in range(n)]

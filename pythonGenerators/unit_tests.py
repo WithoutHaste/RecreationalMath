@@ -1,4 +1,5 @@
 import unittest
+from generate_bell import generate_bell
 from generate_divisors import generate_divisors
 from generate_esthetic import generate_esthetic
 from generate_happy import generate_happy
@@ -254,6 +255,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in partitions)
 		for i in known_partitions:
 			self.assertTrue(i in partitions)
+			
+	def test_generate_bell(self):
+		known_not_bell = [0, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 51, 53, 202]
+		known_bell = [1, 2, 5, 15, 52]#, 203]
+		bell = generate_bell(52)#(203)
+		for i in known_not_bell:
+			self.assertFalse(i in bell)
+		for i in known_bell:
+			self.assertTrue(i in bell)
 
 	
 if __name__ == "__main__":
