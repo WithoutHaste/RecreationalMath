@@ -2,6 +2,7 @@ import unittest
 from generate_divisors import generate_divisors
 from generate_esthetic import generate_esthetic
 from generate_happy import generate_happy
+from generate_hogben import generate_hogben
 from generate_lucky import generate_lucky, apply_next_lucky
 from generate_perfect_powers import generate_perfect_powers
 from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations, increment_and_return_permutation, n_is_practical_by_permutations
@@ -194,6 +195,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in esthetic)
 		for i in known_esthetic:
 			self.assertTrue(i in esthetic)
+	
+	def test_generate_hogben(self):
+		known_not_hogben = [0, 2, 4, 5, 6, 8, 9, 10, 11, 12, 14]
+		known_hogben = [1, 3, 7, 13, 21, 31, 43, 57, 73, 91, 111, 133, 157, 183, 211, 241, 273, 307, 343, 381]
+		hogben = generate_hogben(381)
+		for i in known_not_hogben:
+			self.assertFalse(i in hogben)
+		for i in known_hogben:
+			self.assertTrue(i in hogben)
 
 	
 if __name__ == "__main__":
