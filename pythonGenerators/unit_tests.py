@@ -7,6 +7,7 @@ from generate_lucky import generate_lucky, apply_next_lucky
 from generate_perfect_powers import generate_perfect_powers
 from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations, increment_and_return_permutation, n_is_practical_by_permutations
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
+from generate_self import generate_self
 
 class unit_tests(unittest.TestCase):
 	def test_prime(self):
@@ -204,6 +205,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in hogben)
 		for i in known_hogben:
 			self.assertTrue(i in hogben)
+			
+	def test_generate_self(self):
+		known_not_self = [0, 2, 4, 6, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21]
+		known_self = [1, 3, 5, 7, 9, 20, 31, 42, 53, 64, 75, 86, 97, 108, 110, 121, 132, 143, 154, 165, 176]
+		self_result = generate_self(176)
+		for i in known_not_self:
+			self.assertFalse(i in self_result)
+		for i in known_self:
+			self.assertTrue(i in self_result)
 
 	
 if __name__ == "__main__":

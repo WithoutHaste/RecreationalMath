@@ -45,7 +45,7 @@ def digits(n):
 
 	result = []
 	while n > 0:
-		result.append(n % 10)
+		result.append(int(n % 10))
 		n = (n - (n % 10)) / 10
 	return result
 	
