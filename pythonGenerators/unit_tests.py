@@ -1,5 +1,6 @@
 import unittest
 from generate_bell import generate_bell
+from generate_catalan import generate_catalan
 from generate_divisors import generate_divisors
 from generate_esthetic import generate_esthetic
 from generate_happy import generate_happy
@@ -264,6 +265,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in bell)
 		for i in known_bell:
 			self.assertTrue(i in bell)
+			
+	def test_generate_catalan(self):
+		known_not_catalan = [0, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 15, 41, 43, 131, 133]
+		known_catalan = [1, 2, 5, 14, 42, 132]
+		catalan = generate_catalan(132)
+		for i in known_not_catalan:
+			self.assertFalse(i in catalan)
+		for i in known_catalan:
+			self.assertTrue(i in catalan)
 
 	
 if __name__ == "__main__":
