@@ -5,6 +5,7 @@ from generate_happy import generate_happy
 from generate_hogben import generate_hogben
 from generate_lucky import generate_lucky, apply_next_lucky
 from generate_magic import generate_magic
+from generate_magnanimous import generate_magnanimous
 from generate_perfect_powers import generate_perfect_powers
 from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations, increment_and_return_permutation, n_is_practical_by_permutations
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
@@ -224,6 +225,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in magic)
 		for i in known_magic:
 			self.assertTrue(i in magic)
+			
+	def test_generate_magnanimous(self):
+		known_not_magnanimous = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 17, 18, 19, 22, 24, 26, 27, 28, 31, 33, 35, 36, 37, 122]
+		known_magnanimous = [11, 12, 14, 16, 20, 21, 23, 25, 29, 30, 32, 34, 38, 41, 43, 47, 49, 50, 52, 56, 58, 61, 65, 67, 70, 74, 76, 83, 85, 89, 92, 94, 98, 101, 110, 112, 116, 118]
+		magnanimous = generate_magnanimous(122)
+		for i in known_not_magnanimous:
+			self.assertFalse(i in magnanimous)
+		for i in known_magnanimous:
+			self.assertTrue(i in magnanimous)
 
 	
 if __name__ == "__main__":

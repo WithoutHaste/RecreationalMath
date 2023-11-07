@@ -47,6 +47,7 @@ def digits(n):
 	while n > 0:
 		result.append(int(n % 10))
 		n = (n - (n % 10)) / 10
+	result.reverse()
 	return result
 	
 def apply_path(is_happy, path, val):
