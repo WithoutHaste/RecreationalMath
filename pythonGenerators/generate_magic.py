@@ -23,7 +23,7 @@ def main():
 
 	magic_10000 = generate_magic(10000)
 	save_as_text_list(magic_10000, 'magic_1_10000')
-	save_as_javascript_list(magic_10000, 'integers_magic', 'INTS_magic', ['magic numbers 1-10000'], 'w')
+	save_as_javascript_list(magic_10000, 'integers_magic', 'INTS_MAGIC', ['magic numbers 1-10000'], 'w')
 
 if __name__ == "__main__":
     main()
