@@ -1,5 +1,4 @@
 from utils import save_as_text_list, save_as_javascript_list
-from generate_happy import digits
 
 def generate_magic(max):
 	""" Returns an array of magic numbers from 1 to max """
