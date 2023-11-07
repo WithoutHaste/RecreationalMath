@@ -1,5 +1,6 @@
 import unittest
 from generate_divisors import generate_divisors
+from generate_esthetic import generate_esthetic
 from generate_happy import generate_happy
 from generate_lucky import generate_lucky, apply_next_lucky
 from generate_perfect_powers import generate_perfect_powers
@@ -184,6 +185,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in practical)
 		for i in known_practical:
 			self.assertTrue(i in practical)
+	
+	def test_generate_esthetic(self):
+		known_not_esthetic = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14]
+		known_esthetic = [10, 12, 21, 23, 32, 34, 43, 45, 54, 56, 65, 67, 76, 78, 87, 89, 98, 101, 121]
+		esthetic = generate_esthetic(121)
+		for i in known_not_esthetic:
+			self.assertFalse(i in esthetic)
+		for i in known_esthetic:
+			self.assertTrue(i in esthetic)
 
 	
 if __name__ == "__main__":
