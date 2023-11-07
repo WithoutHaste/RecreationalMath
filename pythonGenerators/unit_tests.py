@@ -4,6 +4,7 @@ from generate_esthetic import generate_esthetic
 from generate_happy import generate_happy
 from generate_hogben import generate_hogben
 from generate_lucky import generate_lucky, apply_next_lucky
+from generate_magic import generate_magic
 from generate_perfect_powers import generate_perfect_powers
 from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations, increment_and_return_permutation, n_is_practical_by_permutations
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
@@ -214,6 +215,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in self_result)
 		for i in known_self:
 			self.assertTrue(i in self_result)
+			
+	def test_generate_magic(self):
+		known_not_magic = [0, 2, 3, 4, 6, 7, 13, 14, 16, 17, 32, 33, 35, 36]
+		known_magic = [1, 5, 15, 34, 65, 111, 175, 260, 369, 505]
+		magic = generate_magic(505)
+		for i in known_not_magic:
+			self.assertFalse(i in magic)
+		for i in known_magic:
+			self.assertTrue(i in magic)
 
 	
 if __name__ == "__main__":
