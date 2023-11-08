@@ -76,13 +76,10 @@ class unit_tests(unittest.TestCase):
 				self.assertTrue(val in divisors[key])
 
 	def test_happy(self):
-		known_unhappy = [4, 16, 37, 58, 89, 145, 42, 20]
-		known_happy = [1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49, 68, 70, 79, 82, 86, 91, 94, 97, 100, 103, 109, 129, 130]
-		happy = generate_happy(200)
-		for i in known_unhappy:
-			self.assertFalse(i in happy)
-		for i in known_happy:
-			self.assertTrue(i in happy)
+		known_not = [4, 16, 37, 58, 89, 145, 42, 20]
+		known = [1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49, 68, 70, 79, 82, 86, 91, 94, 97, 100, 103, 109, 129, 130]
+		result = generate_happy(200)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_apply_next_lucky(self):
 		# lucky as 1, 3, 5, 7, 9, 11
@@ -95,13 +92,10 @@ class unit_tests(unittest.TestCase):
 		self.assertFalse(is_lucky[11])
 
 	def test_lucky(self):
-		known_unlucky = [0, 2, 4, 5, 6, 8, 10, 11, 12, 14, 16, 17, 18, 19, 20, 22, 23, 24]
-		known_lucky = [1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63, 67, 69, 73, 75, 79, 87, 93, 99, 105]
-		lucky = generate_lucky(200)
-		for i in known_unlucky:
-			self.assertFalse(i in lucky)
-		for i in known_lucky:
-			self.assertTrue(i in lucky)
+		known_not = [0, 2, 4, 5, 6, 8, 10, 11, 12, 14, 16, 17, 18, 19, 20, 22, 23, 24]
+		known = [1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63, 67, 69, 73, 75, 79, 87, 93, 99, 105]
+		result = generate_lucky(200)
+		self.assert_includes_excludes(result, known, known_not)
 
 	def test_perfect_powers(self):
 		known_perfect_powers = [1, 4, 8, 9, 16, 25, 27, 32, 36, 49, 64, 81, 100, 121, 125, 128, 144, 169, 196, 216, 225, 243, 256, 289, 324, 343, 361]
@@ -189,139 +183,100 @@ class unit_tests(unittest.TestCase):
 		self.assertTrue(n_is_practical_by_permutations(348, [1,2,3,4,6,12,29,58,87,116,174,348]))
 	
 	def test_generate_practical(self):
-		known_not_practical = [0, 3, 5, 7, 9, 10, 11, 13, 14, 15]
-		known_practical = [1, 2, 4, 6, 8, 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42, 48, 54, 56, 60, 64, 66, 72, 78, 80, 84, 88, 90, 96, 100, 104, 108, 112, 120, 126, 128, 132, 140, 144, 150, 156, 160]
-		practical = generate_practical(160)
-		for i in known_not_practical:
-			self.assertFalse(i in practical)
-		for i in known_practical:
-			self.assertTrue(i in practical)
+		known_not = [0, 3, 5, 7, 9, 10, 11, 13, 14, 15]
+		known = [1, 2, 4, 6, 8, 12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42, 48, 54, 56, 60, 64, 66, 72, 78, 80, 84, 88, 90, 96, 100, 104, 108, 112, 120, 126, 128, 132, 140, 144, 150, 156, 160]
+		result = generate_practical(160)
+		self.assert_includes_excludes(result, known, known_not)
 	
 	def test_generate_esthetic(self):
-		known_not_esthetic = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14]
-		known_esthetic = [10, 12, 21, 23, 32, 34, 43, 45, 54, 56, 65, 67, 76, 78, 87, 89, 98, 101, 121]
-		esthetic = generate_esthetic(121)
-		for i in known_not_esthetic:
-			self.assertFalse(i in esthetic)
-		for i in known_esthetic:
-			self.assertTrue(i in esthetic)
+		known_not = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14]
+		known = [10, 12, 21, 23, 32, 34, 43, 45, 54, 56, 65, 67, 76, 78, 87, 89, 98, 101, 121]
+		result = generate_esthetic(121)
+		self.assert_includes_excludes(result, known, known_not)
 	
 	def test_generate_hogben(self):
-		known_not_hogben = [0, 2, 4, 5, 6, 8, 9, 10, 11, 12, 14]
-		known_hogben = [1, 3, 7, 13, 21, 31, 43, 57, 73, 91, 111, 133, 157, 183, 211, 241, 273, 307, 343, 381]
-		hogben = generate_hogben(381)
-		for i in known_not_hogben:
-			self.assertFalse(i in hogben)
-		for i in known_hogben:
-			self.assertTrue(i in hogben)
+		known_not = [0, 2, 4, 5, 6, 8, 9, 10, 11, 12, 14]
+		known = [1, 3, 7, 13, 21, 31, 43, 57, 73, 91, 111, 133, 157, 183, 211, 241, 273, 307, 343, 381]
+		result = generate_hogben(381)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_self(self):
-		known_not_self = [0, 2, 4, 6, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21]
-		known_self = [1, 3, 5, 7, 9, 20, 31, 42, 53, 64, 75, 86, 97, 108, 110, 121, 132, 143, 154, 165, 176]
-		self_result = generate_self(176)
-		for i in known_not_self:
-			self.assertFalse(i in self_result)
-		for i in known_self:
-			self.assertTrue(i in self_result)
+		known_not = [0, 2, 4, 6, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21]
+		known = [1, 3, 5, 7, 9, 20, 31, 42, 53, 64, 75, 86, 97, 108, 110, 121, 132, 143, 154, 165, 176]
+		result = generate_self(176)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_magic(self):
-		known_not_magic = [0, 2, 3, 4, 6, 7, 13, 14, 16, 17, 32, 33, 35, 36]
-		known_magic = [1, 5, 15, 34, 65, 111, 175, 260, 369, 505]
-		magic = generate_magic(505)
-		for i in known_not_magic:
-			self.assertFalse(i in magic)
-		for i in known_magic:
-			self.assertTrue(i in magic)
+		known_not = [0, 2, 3, 4, 6, 7, 13, 14, 16, 17, 32, 33, 35, 36]
+		known = [1, 5, 15, 34, 65, 111, 175, 260, 369, 505]
+		result = generate_magic(505)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_magnanimous(self):
-		known_not_magnanimous = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 17, 18, 19, 22, 24, 26, 27, 28, 31, 33, 35, 36, 37, 122]
-		known_magnanimous = [11, 12, 14, 16, 20, 21, 23, 25, 29, 30, 32, 34, 38, 41, 43, 47, 49, 50, 52, 56, 58, 61, 65, 67, 70, 74, 76, 83, 85, 89, 92, 94, 98, 101, 110, 112, 116, 118]
-		magnanimous = generate_magnanimous(122)
-		for i in known_not_magnanimous:
-			self.assertFalse(i in magnanimous)
-		for i in known_magnanimous:
-			self.assertTrue(i in magnanimous)
+		known_not = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 17, 18, 19, 22, 24, 26, 27, 28, 31, 33, 35, 36, 37, 122]
+		known = [11, 12, 14, 16, 20, 21, 23, 25, 29, 30, 32, 34, 38, 41, 43, 47, 49, 50, 52, 56, 58, 61, 65, 67, 70, 74, 76, 83, 85, 89, 92, 94, 98, 101, 110, 112, 116, 118]
+		result = generate_magnanimous(122)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_nude(self):
-		known_not_nude = [0, 10, 13, 14, 16, 17, 18, 19, 20, 21]
-		known_nude = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22, 24, 33, 36, 44, 48, 55, 66, 77, 88, 99, 111, 112, 115, 122, 124, 126, 128]
-		nude = generate_nude(128)
-		for i in known_not_nude:
-			self.assertFalse(i in nude)
-		for i in known_nude:
-			self.assertTrue(i in nude)
+		known_not = [0, 10, 13, 14, 16, 17, 18, 19, 20, 21]
+		known = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22, 24, 33, 36, 44, 48, 55, 66, 77, 88, 99, 111, 112, 115, 122, 124, 126, 128]
+		result = generate_nude(128)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_partitions(self):
-		known_not_partitions = [0, 4, 6, 8, 9, 10, 12, 13, 16, 17, 18, 19, 20, 21, 23, 29, 31, 41, 43, 55, 57, 76, 78, 100, 102, 134]
-		known_partitions = [1, 2, 3, 5, 7, 11, 15, 22, 30, 42, 56, 77, 101, 135]
-		partitions = generate_partitions(135)
-		for i in known_not_partitions:
-			self.assertFalse(i in partitions)
-		for i in known_partitions:
-			self.assertTrue(i in partitions)
+		known_not = [0, 4, 6, 8, 9, 10, 12, 13, 16, 17, 18, 19, 20, 21, 23, 29, 31, 41, 43, 55, 57, 76, 78, 100, 102, 134]
+		known = [1, 2, 3, 5, 7, 11, 15, 22, 30, 42, 56, 77, 101, 135]
+		result = generate_partitions(135)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_bell(self):
-		known_not_bell = [0, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 51, 53, 202]
-		known_bell = [1, 2, 5, 15, 52]#, 203]
-		bell = generate_bell(52)#(203)
-		for i in known_not_bell:
-			self.assertFalse(i in bell)
-		for i in known_bell:
-			self.assertTrue(i in bell)
+		known_not = [0, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 51, 53, 202]
+		known = [1, 2, 5, 15, 52]#, 203]
+		result = generate_bell(52)#(203)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_catalan(self):
-		known_not_catalan = [0, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 15, 41, 43, 131, 133]
-		known_catalan = [1, 2, 5, 14, 42, 132]
-		catalan = generate_catalan(132)
-		for i in known_not_catalan:
-			self.assertFalse(i in catalan)
-		for i in known_catalan:
-			self.assertTrue(i in catalan)
+		known_not = [0, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 15, 41, 43, 131, 133]
+		known = [1, 2, 5, 14, 42, 132]
+		result = generate_catalan(132)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_primeval(self):
-		known_not_primeval = [0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 30, 31, 32, 33, 34, 35, 36, 38, 39, 40, 106, 108]
-		known_primeval = [1, 2, 13, 37, 107]
-		primeval = generate_primeval(107)
-		for i in known_not_primeval:
-			self.assertFalse(i in primeval)
-		for i in known_primeval:
-			self.assertTrue(i in primeval)
+		known_not = [0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 30, 31, 32, 33, 34, 35, 36, 38, 39, 40, 106, 108]
+		known = [1, 2, 13, 37, 107]
+		result = generate_primeval(107)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_triangular(self):
-		known_not_triangular = [0, 2, 4, 5, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 29, 30]
-		known_triangular = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190, 210]
-		triangular = generate_triangular(210)
-		for i in known_not_triangular:
-			self.assertFalse(i in triangular)
-		for i in known_triangular:
-			self.assertTrue(i in triangular)
+		known_not = [0, 2, 4, 5, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 29, 30]
+		known = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190, 210]
+		result = generate_triangular(210)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_square(self):
-		known_not_square = [0, 2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 26]
-		known_square = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256]
-		square = generate_square(256)
-		for i in known_not_square:
-			self.assertFalse(i in square)
-		for i in known_square:
-			self.assertTrue(i in square)
+		known_not = [0, 2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 26]
+		known = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256]
+		result = generate_square(256)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_pentagonal(self):
-		known_not_pentagonal = [0, 2, 3, 4, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23]
-		known_pentagonal = [1, 5, 12, 22, 35, 51, 70, 92, 117, 145, 176, 210, 247, 287]
-		pentagonal = generate_pentagonal(287)
-		for i in known_not_pentagonal:
-			self.assertFalse(i in pentagonal)
-		for i in known_pentagonal:
-			self.assertTrue(i in pentagonal)
+		known_not = [0, 2, 3, 4, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23]
+		known = [1, 5, 12, 22, 35, 51, 70, 92, 117, 145, 176, 210, 247, 287]
+		result = generate_pentagonal(287)
+		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_sphenic(self):
-		known_not_sphenic = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 120]
-		known_sphenic = [30, 42, 66, 70, 78, 102, 105, 110, 114, 130, 138, 154, 165, 170]
-		sphenic = generate_sphenic(170)
-		for i in known_not_sphenic:
-			self.assertFalse(i in sphenic)
-		for i in known_sphenic:
-			self.assertTrue(i in sphenic)
+		known_not = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 120]
+		known = [30, 42, 66, 70, 78, 102, 105, 110, 114, 130, 138, 154, 165, 170]
+		result = generate_sphenic(170)
+		self.assert_includes_excludes(result, known, known_not)
+			
+	def assert_includes_excludes(self, list, included, excluded):
+		for i in included:
+			self.assertTrue(i in list)
+		for i in excluded:
+			self.assertFalse(i in list)
 
 
 	
