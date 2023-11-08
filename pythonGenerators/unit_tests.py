@@ -3,6 +3,7 @@ from generate_bell import generate_bell
 from generate_catalan import generate_catalan
 from generate_divisors import generate_divisors
 from generate_esthetic import generate_esthetic
+from generate_figurate import generate_triangular, generate_square, generate_pentagonal
 from generate_happy import generate_happy
 from generate_hogben import generate_hogben
 from generate_lucky import generate_lucky, apply_next_lucky
@@ -284,6 +285,34 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in primeval)
 		for i in known_primeval:
 			self.assertTrue(i in primeval)
+			
+	def test_generate_triangular(self):
+		known_not_triangular = [0, 2, 4, 5, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 29, 30]
+		known_triangular = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190, 210]
+		triangular = generate_triangular(210)
+		for i in known_not_triangular:
+			self.assertFalse(i in triangular)
+		for i in known_triangular:
+			self.assertTrue(i in triangular)
+			
+	def test_generate_square(self):
+		known_not_square = [0, 2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 26]
+		known_square = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256]
+		square = generate_square(256)
+		for i in known_not_square:
+			self.assertFalse(i in square)
+		for i in known_square:
+			self.assertTrue(i in square)
+			
+	def test_generate_pentagonal(self):
+		known_not_pentagonal = [0, 2, 3, 4, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23]
+		known_pentagonal = [1, 5, 12, 22, 35, 51, 70, 92, 117, 145, 176, 210, 247, 287]
+		pentagonal = generate_pentagonal(287)
+		for i in known_not_pentagonal:
+			self.assertFalse(i in pentagonal)
+		for i in known_pentagonal:
+			self.assertTrue(i in pentagonal)
+
 
 	
 if __name__ == "__main__":
