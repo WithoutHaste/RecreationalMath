@@ -13,6 +13,7 @@ from generate_partitions import generate_partitions
 from generate_perfect_powers import generate_perfect_powers
 from generate_practical import generate_sums_to_n, contains_set, one_of_these_is_a_subset, generate_practical, generate_permutations, increment_and_return_permutation, n_is_practical_by_permutations
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
+from generate_primeval import generate_primeval
 from generate_self import generate_self
 
 class unit_tests(unittest.TestCase):
@@ -274,6 +275,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in catalan)
 		for i in known_catalan:
 			self.assertTrue(i in catalan)
+			
+	def test_generate_primeval(self):
+		known_not_primeval = [0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 30, 31, 32, 33, 34, 35, 36, 38, 39, 40, 106, 108]
+		known_primeval = [1, 2, 13, 37, 107]
+		primeval = generate_primeval(107)
+		for i in known_not_primeval:
+			self.assertFalse(i in primeval)
+		for i in known_primeval:
+			self.assertTrue(i in primeval)
 
 	
 if __name__ == "__main__":
