@@ -16,6 +16,7 @@ from generate_practical import generate_sums_to_n, contains_set, one_of_these_is
 from generate_primes import generate_primes, generate_emirp_primes, generate_twin_primes, generate_balanced_primes
 from generate_primeval import generate_primeval
 from generate_self import generate_self
+from generate_sphenic import generate_sphenic
 
 class unit_tests(unittest.TestCase):
 	def test_prime(self):
@@ -312,6 +313,15 @@ class unit_tests(unittest.TestCase):
 			self.assertFalse(i in pentagonal)
 		for i in known_pentagonal:
 			self.assertTrue(i in pentagonal)
+			
+	def test_generate_sphenic(self):
+		known_not_sphenic = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 43, 120]
+		known_sphenic = [30, 42, 66, 70, 78, 102, 105, 110, 114, 130, 138, 154, 165, 170]
+		sphenic = generate_sphenic(170)
+		for i in known_not_sphenic:
+			self.assertFalse(i in sphenic)
+		for i in known_sphenic:
+			self.assertTrue(i in sphenic)
 
 
 	
