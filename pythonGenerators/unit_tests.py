@@ -4,6 +4,7 @@ from generate_catalan import generate_catalan
 from generate_divisors import generate_divisors
 from generate_esthetic import generate_esthetic
 from generate_figurate import generate_triangular, generate_square, generate_pentagonal
+from generate_goldbach_conjecture import generate_goldbach_conjecture
 from generate_happy import generate_happy
 from generate_hogben import generate_hogben
 from generate_lucky import generate_lucky, apply_next_lucky
@@ -19,6 +20,13 @@ from generate_self import generate_self
 from generate_sphenic import generate_sphenic
 
 class unit_tests(unittest.TestCase):
+			
+	def assert_includes_excludes(self, list, included, excluded):
+		for i in included:
+			self.assertTrue(i in list)
+		for i in excluded:
+			self.assertFalse(i in list)
+
 	def test_prime(self):
 		known_primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 		primes = generate_primes(1000)
@@ -272,11 +280,26 @@ class unit_tests(unittest.TestCase):
 		result = generate_sphenic(170)
 		self.assert_includes_excludes(result, known, known_not)
 			
-	def assert_includes_excludes(self, list, included, excluded):
-		for i in included:
-			self.assertTrue(i in list)
-		for i in excluded:
-			self.assertFalse(i in list)
+	def test_generate_goldbach_conjecture(self):
+		known = {
+			4: [2, 2],
+			6: [3, 3],
+			8: [3, 5],
+			10: [3, 7],
+			12: [5, 7],
+			14: [3, 11],
+			16: [3, 13],
+			18: [5, 13],
+			20: [3, 17],
+		}
+		result = generate_goldbach_conjecture(20)
+		for key in known:
+			if known[key] == None:
+				self.assertEqual(None, result[key])
+			else:
+				self.assertEqual(len(known[key]), len(result[key]))
+				for val in known[key]:
+					self.assertTrue(val in result[key])
 
 
 	
