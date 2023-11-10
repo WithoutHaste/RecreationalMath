@@ -10,7 +10,7 @@ from generate_hogben import generate_hogben
 from generate_lucky import generate_lucky, apply_next_lucky
 from generate_magic import generate_magic
 from generate_magnanimous import generate_magnanimous
-from generate_niven import generate_niven
+from generate_niven import generate_niven, generate_super_niven
 from generate_nude import generate_nude
 from generate_partitions import generate_partitions
 from generate_perfect_powers import generate_perfect_powers
@@ -285,6 +285,12 @@ class unit_tests(unittest.TestCase):
 		known_not = [0, 11, 13, 14, 15, 16, 17, 19, 22, 23, 25, 26, 28, 29, 31, 32]
 		known = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 18, 20, 21, 24, 27, 30, 36, 40, 42, 45, 48, 50, 54, 60, 63, 70, 72, 80, 81, 84, 90]
 		result = generate_niven(90)
+		self.assert_includes_excludes(result, known, known_not)
+			
+	def test_generate_super_niven(self):
+		known_not = [0, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 28, 29, 31, 35, 37, 39, 41, 47, 49, 51, 59, 61]
+		known = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 20, 24, 30, 36, 40, 48, 50, 60, 70, 80, 90, 100, 102, 110, 120, 140, 150]
+		result = generate_super_niven(150)
 		self.assert_includes_excludes(result, known, known_not)
 			
 	def test_generate_goldbach_conjecture(self):
