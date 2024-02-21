@@ -32,7 +32,7 @@ def generate_practical(max):
 	return is_practical
 	
 def n_is_practical_by_permutations(n, divisors):
-	""" Brute force check if n is practical - can all lower positive ints be written as the sum of distict divisors? """
+	""" Brute force check if n is practical - can all lower positive ints be written as the sum of distinct divisors? """
 	""" 
 	Algorithm:
 		take each divisor of n from lowest to highest
