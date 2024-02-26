@@ -1,9 +1,10 @@
 import unittest
 from generate_bell import generate_bell
 from generate_catalan import generate_catalan
-from generate_divisors import generate_divisors
+from generate_divisors import generate_divisors, generate_prime_divisors
 from generate_esthetic import generate_esthetic
 from generate_figurate import generate_triangular, generate_square, generate_pentagonal
+from generate_friendly_clusters import generate_friendly_clusters
 from generate_goldbach_conjecture import generate_goldbach_conjecture
 from generate_happy import generate_happy
 from generate_hogben import generate_hogben
@@ -83,6 +84,35 @@ class unit_tests(unittest.TestCase):
 			self.assertEqual(len(known_divisors[key]), len(divisors[key]))
 			for val in known_divisors[key]:
 				self.assertTrue(val in divisors[key])
+
+	def test_prime_divisors(self):
+		known_divisors = {
+			1: [],
+			2: [2],
+			3: [3],
+			4: [2, 2],
+			5: [5],
+			6: [2, 3],
+			7: [7],
+			8: [2, 2, 2],
+			9: [3, 3],
+			10: [2, 5],
+			11: [11],
+			12: [2, 2, 3],
+			13: [13],
+			14: [2, 7],
+			15: [3, 5],
+			16: [2, 2, 2, 2],
+			17: [17],
+			18: [2, 3, 3],
+			19: [19],
+			20: [2, 2, 5],		
+		}
+		prime_divisors = generate_prime_divisors(30)
+		for key in known_divisors:
+			self.assertEqual(len(known_divisors[key]), len(prime_divisors[key]))
+			for val in known_divisors[key]:
+				self.assertTrue(val in prime_divisors[key])
 
 	def test_happy(self):
 		known_not = [4, 16, 37, 58, 89, 145, 42, 20]
@@ -313,6 +343,38 @@ class unit_tests(unittest.TestCase):
 				self.assertEqual(len(known[key]), len(result[key]))
 				for val in known[key]:
 					self.assertTrue(val in result[key])
+
+	def test_friendly_clusters(self):
+		known_clusters = {
+			0: [1],
+			#1: [],
+			2: [2],
+			3: [3],
+			4: [4],
+			5: [5, 6],
+			6: [8, 9],
+			7: [7, 10, 12],
+			8: [15, 16, 18],
+			9: [14, 20, 24, 27],
+			10: [21, 25, 30],
+			11: [11, 28],
+			#12: [],
+			13: [13, 22],
+			#14: [],
+			15: [26],
+			#16: [],
+			17: [17],
+			#18: [],
+			19: [19],
+			#20: [],
+			23: [23],
+			29: [29],
+		}
+		clusters = generate_friendly_clusters(30)
+		for key in known_clusters:
+			self.assertEqual(len(known_clusters[key]), len(clusters[key]))
+			for val in known_clusters[key]:
+				self.assertTrue(val in clusters[key])
 
 
 	
