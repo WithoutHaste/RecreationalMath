@@ -1,0 +1,8 @@
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\Generator\bin\Debug\Generator.exe.config
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\Generator\bin\Debug\Generator.exe
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\Generator\bin\Debug\Generator.pdb
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\Generator\bin\Debug\WithoutHaste.Sequences.dll
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\Generator\bin\Debug\WithoutHaste.Sequences.pdb
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\Generator\obj\Debug\Generator.csprojResolveAssemblyReference.cache
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\Generator\obj\Debug\Generator.exe
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\Generator\obj\Debug\Generator.pdb

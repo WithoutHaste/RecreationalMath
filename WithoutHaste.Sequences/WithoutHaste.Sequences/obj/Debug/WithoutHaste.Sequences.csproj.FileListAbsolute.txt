@@ -1,0 +1,5 @@
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\WithoutHaste.Sequences\bin\Debug\WithoutHaste.Sequences.dll
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\WithoutHaste.Sequences\bin\Debug\WithoutHaste.Sequences.pdb
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\WithoutHaste.Sequences\obj\Debug\WithoutHaste.Sequences.dll
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\WithoutHaste.Sequences\obj\Debug\WithoutHaste.Sequences.pdb
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\WithoutHaste.Sequences\obj\Debug\WithoutHaste.Sequences.csprojResolveAssemblyReference.cache

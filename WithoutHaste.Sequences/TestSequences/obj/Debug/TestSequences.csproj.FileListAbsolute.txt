@@ -1,0 +1,8 @@
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\TestSequences\bin\Debug\TestSequences.dll
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\TestSequences\bin\Debug\TestSequences.pdb
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\TestSequences\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\TestSequences\bin\Debug\WithoutHaste.Sequences.dll
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\TestSequences\bin\Debug\WithoutHaste.Sequences.pdb
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\TestSequences\obj\Debug\TestSequences.csprojResolveAssemblyReference.cache
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\TestSequences\obj\Debug\TestSequences.dll
+E:\GitHub\RecreationalMath\WithoutHaste.Sequences\TestSequences\obj\Debug\TestSequences.pdb
